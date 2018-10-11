@@ -1,0 +1,24 @@
+
+<h3>Your Reading Space for {{ reading.book.title }} by {{ reading.book.author }}</h3>
+
+<div class="reading-container">
+  <div class="book-detals">
+    <img [src]="reading.book.imageUrl" alt="book cover">
+  </div>
+  
+  <div class="note-section">
+    <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
+      <div class="quote">
+        {{ qn.quote}}
+      </div>
+      <br>
+      <div class="note">
+        {{ qn.note}}
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button (click)="openDialog()">Log Reading Note</button>
+    </div>
+  </div>
+
+</div>

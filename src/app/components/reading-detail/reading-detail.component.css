@@ -1,0 +1,47 @@
+img {
+  width: 270px;
+  height: auto;
+}
+
+.reading-container {
+  /* display: flex; */
+  margin-top: 50px;
+  /* justify-content: space-between; */
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 40px;
+}
+
+.new {
+    width: 300px;
+}
+
+.new textarea {
+    width: 300px;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.quote {
+    font-style: oblique;
+}
+
+.noteQuote {
+    background: rgb(224, 213, 213);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.note-section {
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 15px;
+}

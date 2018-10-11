@@ -11,13 +11,19 @@ import { FormsModule } from '@angular/forms';
 import { BookSearchComponent } from './components/book-search/book-search.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppShellComponent } from './components/app-shell/app-shell.component';
+import { ReadingsComponent } from './components/readings/readings.component';
+import { ReadingDetailComponent } from './components/reading-detail/reading-detail.component';
+import { NoteDialogComponent } from './components/note-dialog/note-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookSearchComponent,
     WelcomeComponent,
-    AppShellComponent
+    AppShellComponent,
+    ReadingsComponent,
+    ReadingDetailComponent,
+    NoteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +33,9 @@ import { AppShellComponent } from './components/app-shell/app-shell.component';
     MaterialModule,
     FlexLayoutModule,
     FormsModule
+  ],
+  entryComponents: [
+    NoteDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

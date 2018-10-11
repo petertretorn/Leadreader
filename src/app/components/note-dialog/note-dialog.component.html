@@ -1,0 +1,15 @@
+<div class="new">
+  <div>
+    <mat-form-field>
+      <textarea [(ngModel)]="quoteNote.quote" rows=3 name="quote" matInput placeholder="quote"></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea [(ngModel)]="quoteNote.note" rows=3 name="note" matInput placeholder="Your notes"></textarea>
+    </mat-form-field>  
+  </div>
+  <div class="btn-wrapper">
+    <button (click)="addQuoteNote()" mat-button mat-raised-button color="primary">SAVE</button>
+  </div>
+</div>

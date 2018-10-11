@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from "@angular/core";
 import { GoogleApiService } from "../../services/google-api.service";
 import { fromEvent } from "rxjs";
@@ -8,6 +10,7 @@ import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChang
 import { switchMap } from "rxjs/internal/operators/switchMap";
 import { tap } from "rxjs/internal/operators/tap";
 import { Key } from "selenium-webdriver";
+import { Book } from '../../models/book';
 
 @Component({
   selector: "lr-book-search",
@@ -17,17 +20,20 @@ import { Key } from "selenium-webdriver";
 export class BookSearchComponent implements OnInit {
   bookData: any[] = [];
   searchTerm: string;
-  constructor(private apiService: GoogleApiService) {}
+  constructor(
+    private apiService: GoogleApiService, 
+    private userService: UserService,
+    private router: Router) {}
 
   ngOnInit() {}
 
   search() {
     this.bookData = null;
 
-    this.apiService.searchBooks(this.searchTerm).subscribe(bookData => {
+    this.apiService.searchBooks(this.searchTerm).subscribe((bookData: any) => {
       console.log(bookData)
       
-      Object.values(bookData).forEach(bd => {
+      Object.values(bookData).forEach( (bd: any) => {
         console.log(bd.volumeInfo.title);
         if (!bd.volumeInfo.imageLinks) {
           bd.volumeInfo.imageLinks = {
@@ -38,5 +44,18 @@ export class BookSearchComponent implements OnInit {
 
       this.bookData = bookData;
     });
+  }
+
+  addReading(volumeInfo: any) {
+    let title = !!volumeInfo.title ? volumeInfo.title : 'no title'
+    let author = !!volumeInfo.authors ? volumeInfo.authors.join(', ') : 'no author'
+    let categories = !!volumeInfo.categories ? volumeInfo.categories.join(', ') : ''
+    let imageUrl = volumeInfo.imageLinks.thumbnail
+
+    let book = new Book(title, author, categories, imageUrl)
+
+    this.userService.createReading(book)
+
+    this.router.navigate(['/app/readings/1']);
   }
 }

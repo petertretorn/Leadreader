@@ -1,18 +1,20 @@
 <mat-toolbar color="primary">
   <span>LeadReader</span>
 
-  <span class="spacer"></span>
+  <!-- <span class="spacer"></span> -->
 
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <a mat-menu-item [routerLink]="['search-book']">
-      <mat-icon>book</mat-icon>
-      <span>Search Books</span>
-    </a>
-  </mat-menu>
+  <h3 class="menu-btn" mat-button [matMenuTriggerFor]="menu">Menu</h3>
+
+  <!-- <mat-icon>more_vert</mat-icon> -->
+
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <a mat-menu-item [routerLink]="['search-book']">
+    <mat-icon>book</mat-icon>
+    <span>Search Books</span>
+  </a>
+</mat-menu>
 
 <div class="container">
   <router-outlet></router-outlet>
