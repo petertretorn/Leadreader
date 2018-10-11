@@ -1,0 +1,38 @@
+.showcase::after {
+  content: "";
+  height: 50vh;
+  width: 100%;
+  background-image: url(/assets/images/books.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+}
+
+.content {
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  left: 50%;
+  margin-top: 50px;
+  margin-left: -250px;
+  width: 500px;
+  height: 150px;
+  text-align: center;
+}
+
+.content .title {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+.content .text {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.join {
+    margin: 40px auto;
+    width: 100px; 
+}
