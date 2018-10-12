@@ -22,4 +22,8 @@ export class NoteDialogComponent implements OnInit {
   addQuoteNote() {
     this.dialogRef.close(this.quoteNote)
   }
+
+  cancel() {
+    this.dialogRef.close()
+  }
 }

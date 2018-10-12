@@ -40,11 +40,10 @@ export class ReadingDetailComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
-      width: '300px',
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe( (quoteNote: QuoteNote) => {
-      console.log('The dialog was closed');
       quoteNote.created = new Date();
       this.reading.quoteNotes.push(quoteNote);
     })

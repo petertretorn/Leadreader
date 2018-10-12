@@ -14,6 +14,14 @@ import { AppShellComponent } from './components/app-shell/app-shell.component';
 import { ReadingsComponent } from './components/readings/readings.component';
 import { ReadingDetailComponent } from './components/reading-detail/reading-detail.component';
 import { NoteDialogComponent } from './components/note-dialog/note-dialog.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { environment } from '../environments/environment';
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,10 @@ import { NoteDialogComponent } from './components/note-dialog/note-dialog.compon
     HttpClientModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   entryComponents: [
     NoteDialogComponent

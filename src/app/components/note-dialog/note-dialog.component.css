@@ -1,0 +1,25 @@
+.new {
+    width: 450px;
+}
+
+.new textarea {
+    width: 450px;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+.new textarea[name="quote"] {
+    font-style: oblique;
+}
+
+.new textarea {
+    font-size: 1.2rem;
+}
+
+/* 
+.btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+} */

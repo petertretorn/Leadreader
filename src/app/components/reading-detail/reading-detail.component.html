@@ -15,9 +15,12 @@
       <div class="note">
         {{ qn.note}}
       </div>
+      <div class="posted-date">
+        Posted {{ qn.created | date }}
+      </div>
     </div>
     <div>
-      <button mat-raised-button (click)="openDialog()">Log Reading Note</button>
+      <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
     </div>
   </div>
 
