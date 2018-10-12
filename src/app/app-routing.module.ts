@@ -1,3 +1,4 @@
+import { WelcomeGuard } from './services/welcome.guard';
 import { ReadingsComponent } from './components/readings/readings.component';
 import { AppShellComponent } from './components/app-shell/app-shell.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
       { path: 'readings/:id', component: ReadingDetailComponent }, 
     ]
   },
-  { path: 'welcome', component: WelcomeComponent },
+  { path: 'welcome', component: WelcomeComponent, canActivate: [WelcomeGuard] },
   { path: '**', redirectTo: '/welcome' }, 
   
 ];

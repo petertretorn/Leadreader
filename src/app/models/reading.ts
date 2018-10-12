@@ -1,15 +1,16 @@
 import { QuoteNote } from './quote-note';
 import { Book } from './book';
-import { Reader } from './reader';
+import { User } from './reader';
 export class Reading {
 
     constructor(book: Book) {
         this.book = book
     }
 
+    id: string
     book: Book
     quoteNotes: QuoteNote[]
     isPrivate: boolean
-    owner: Reader
-    members: Reader[]
+    owner: User
+    members: User[]
 }

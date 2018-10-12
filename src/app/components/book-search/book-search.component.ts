@@ -54,8 +54,8 @@ export class BookSearchComponent implements OnInit {
 
     let book = new Book(title, author, categories, imageUrl)
 
-    this.userService.createReading(book)
-
-    this.router.navigate(['/app/readings/1']);
+    this.userService.createReading(book).subscribe(
+      reading => this.router.navigate([`/app/readings/${reading.id}`])
+    )
   }
 }

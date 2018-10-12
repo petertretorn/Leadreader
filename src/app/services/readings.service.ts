@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { QuoteNote } from 'src/app/models/quote-note';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class ReadingsService {
   private readingsCollection: AngularFirestoreCollection<Reading>;
 
   constructor(private readonly afs: AngularFirestore) {
+    this.afs = afs
     this.readingsCollection = afs.collection<Reading>('readings');
    }
 
@@ -27,20 +29,25 @@ export class ReadingsService {
     obj = { ...obj, id}
 
     this.readingsCollection.doc(id).set( { ...obj, id} ).then( 
-      (res) => console.log(res, 'saved to firestore'))
+      () => console.log('saved to firestore'))
 
-    this.readings.push(reading)
+    this.currentReading = obj
 
-    return of<Reading>( reading )
+    return of<Reading>( obj )
   }
 
   addQuoteNote(qnote: QuoteNote) {
 
   }
 
-  getReading(id: number): Observable<Reading> {
+  updateReading(reading: Reading) {
+    this.afs.doc<Reading>(`readings/${reading.id}`).update( this.makePureJSObject(reading) )
+  }
+
+  getReading(id: string): Observable<Reading> {
     //TODO Add storage
-    return of<Reading>(this.readings[0])
+    return this.readingsCollection.doc(id).valueChanges() as Observable<Reading>
+    
   }
 
   private makePureJSObject(reading) {

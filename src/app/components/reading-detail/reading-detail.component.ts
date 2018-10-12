@@ -13,8 +13,6 @@ import { MatDialog } from '@angular/material';
 })
 export class ReadingDetailComponent implements OnInit {
   reading: Reading
-  quoteNote: QuoteNote = new QuoteNote()
-
 
   constructor(
     private route: ActivatedRoute,
@@ -24,18 +22,13 @@ export class ReadingDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const id = +params.get("id");
+      const id = params.get("id");
 
       this.readingsService.getReading(id).subscribe(reading => {
         this.reading = reading;
         this.reading.quoteNotes = this.reading.quoteNotes || []
       });
     });
-  }
-
-  addQuoteNote() {
-    
-    this.quoteNote = new QuoteNote();
   }
 
   openDialog(): void {
@@ -46,6 +39,7 @@ export class ReadingDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe( (quoteNote: QuoteNote) => {
       quoteNote.created = new Date();
       this.reading.quoteNotes.push(quoteNote);
+      this.readingsService.updateReading(this.reading)
     })
   }
 }
