@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ReadingsService } from "../../services/readings.service";
 import { MatDialog } from '@angular/material';
+import { Input } from '@angular/core';
 
 @Component({
   selector: "lr-reading-detail",
@@ -12,7 +13,8 @@ import { MatDialog } from '@angular/material';
   styleUrls: ["./reading-detail.component.css"]
 })
 export class ReadingDetailComponent implements OnInit {
-  reading: Reading
+  
+  @Input() reading: Reading
 
   constructor(
     private route: ActivatedRoute,
@@ -21,14 +23,15 @@ export class ReadingDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get("id");
+    this.reading.quoteNotes = this.reading.quoteNotes || []
+    // this.route.paramMap.subscribe(params => {
+    //   const id = params.get("id");
 
-      this.readingsService.getReading(id).subscribe(reading => {
-        this.reading = reading;
-        this.reading.quoteNotes = this.reading.quoteNotes || []
-      });
-    });
+    //   this.readingsService.getReading(id).subscribe(reading => {
+    //     this.reading = reading;
+    //     this.reading.quoteNotes = this.reading.quoteNotes || []
+    //   });
+    // });
   }
 
   openDialog(): void {

@@ -1,4 +1,5 @@
 <div class="main">
+  
   <div *ngIf="auth.user$ | async as user" class="profile-section">
     <img class="profile-image" [src]="user.photoURL" alt="profile picture">
     <div class="profile-details">
@@ -14,14 +15,24 @@
     </div>
     <button (click)="editProfile()" mat-button mat-raised-button color="secondary"><i class="fas fa-user-edit"></i>&nbsp;&nbsp;Edit Profile</button>
   </div>
-  <div class="readings-section">
-    <h3>Your Readings</h3>
-    <div class="reading" *ngFor="let reading of readings$ | async" (click)="gotoReading(reading.id)">
+
+  <div *ngIf="!!readings" class="readings-section">
+   
+    <h3>Readings</h3>
+   
+    <div class="reading" *ngFor="let reading of readings" (click)="currentReading = reading">
       <div class="reading-details">
         <span class="title">{{reading.book.title}}</span>
         <span class="author">{{reading.book.author}}</span>
       </div>
       <img [src]="reading.book.imageUrl" alt="book cover">
+    
     </div>
+
   </div>
+
+  <div>
+      <lr-reading-detail *ngIf ="!!currentReading" [reading]="currentReading"></lr-reading-detail>
+  </div>
+
 </div>

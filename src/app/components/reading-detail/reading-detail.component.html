@@ -1,31 +1,20 @@
-<div *ngIf="!!reading">
-  <div class="reading-container">
-    
-    <div class="book">
-        <img [src]="reading.book.imageUrl" alt="book cover">
-        <div class="book-info">
-            <span class="title">{{ reading.book.title }}</span>
-            <span class="author">{{ reading.book.author }}</span>
-          </div>
-    </div>
+<div class="note-section">
 
-    <div class="note-section">
-      <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
-        <div class="quote">
-          {{ qn.quote}}
-        </div>
-        <br>
-        <div class="note">
-          {{ qn.note}}
-        </div>
-        <div class="posted-date">
-          Posted {{ qn.created | date }}
-        </div>
+    <h3>Reading Space for {{reading.book.title}}</h3>
+
+    <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
+      <div class="quote">
+        {{ qn.quote}}
       </div>
-      <div>
-        <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
+      <br>
+      <div class="note">
+        {{ qn.note}}
+      </div>
+      <div class="posted-date">
+        Posted {{ qn.created | date }}
       </div>
     </div>
-
+    <div>
+      <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
+    </div>
   </div>
-</div>

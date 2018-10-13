@@ -15,7 +15,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadingsComponent implements OnInit {
   
-  readings$: Observable<Reading[]>;
+  // readings$: Observable<Reading[]>
+  readings: Reading[]
+  currentReading: Reading = null
 
   constructor(
     private route: ActivatedRoute,
@@ -27,13 +29,18 @@ export class ReadingsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const userId = params.get("userId");
-      this.readings$ = this.readingsService.getReadigsForUser(userId)
-    });
+      // this.readings$ = this.readingsService.getReadigsForUser(userId)
+
+      this.readingsService.getReadigsForUser(userId).subscribe(readings => {
+        this.readings = readings
+      })
+    })
   }
 
-  gotoReading(id) {
-    this.router.navigate([`/app/reading-detail/${id}`])
-  }
+  // gotoReading(id) {
+  //   this.currentReading = 
+  //   this.router.navigate([`/app/reading-detail/${id}`])
+  // }
 
   editProfile() {
     const dialogRef = this.dialog.open(UserDialogComponent, {

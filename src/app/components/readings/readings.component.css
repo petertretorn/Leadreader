@@ -1,6 +1,7 @@
 .main {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
+    grid-gap: 2rem;
 }
 
 .profile-section {
@@ -8,7 +9,7 @@
 }
 
 .profile-image {
-    width: 17rem;
+    width: 12rem;
     height: auto;
     border-radius: 5px;
     border: 1.5px solid rgb(100, 83, 83);
@@ -37,7 +38,7 @@
 }
 
 .reading {
-    width: 450px;
+    width: 400px;
     height: 6rem;
     display: flex;
     align-items: center;
@@ -59,7 +60,11 @@
     height: 3rem;
 }
 
-.reading .reading-details .author {
+.reading-details .title {
+    font-size: 0.9rem;
+}
+
+.reading-details .author {
     font-size: 0.8rem;
 }
 
