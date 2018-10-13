@@ -39,12 +39,15 @@ export class ReadingsService {
     return of<Reading>( obj )
   }
 
-  addQuoteNote(qnote: QuoteNote) {
-
-  }
-
   getReadigsForUser(userId: string): Observable<Reading[]> {
     return this.afs.collection<Reading>('readings', ref => ref.where('userId', '==', userId)).valueChanges()
+  }
+
+  addNoteToReading(reading: Reading, note: QuoteNote) {
+    note.id = this.afs.createId()
+    reading.quoteNotes.push(note)
+
+    this.updateReading(reading)
   }
 
   updateReading(reading: Reading) {

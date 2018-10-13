@@ -6,6 +6,8 @@ import { ActivatedRoute } from "@angular/router";
 import { ReadingsService } from "../../services/readings.service";
 import { MatDialog } from '@angular/material';
 import { Input } from '@angular/core';
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: "lr-reading-detail",
@@ -16,6 +18,9 @@ export class ReadingDetailComponent implements OnInit {
   
   @Input() reading: Reading
 
+  @Output() 
+  public deleteNote = new EventEmitter<string>();
+
   constructor(
     private route: ActivatedRoute,
     private readingsService: ReadingsService,
@@ -24,14 +29,6 @@ export class ReadingDetailComponent implements OnInit {
 
   ngOnInit() {
     this.reading.quoteNotes = this.reading.quoteNotes || []
-    // this.route.paramMap.subscribe(params => {
-    //   const id = params.get("id");
-
-    //   this.readingsService.getReading(id).subscribe(reading => {
-    //     this.reading = reading;
-    //     this.reading.quoteNotes = this.reading.quoteNotes || []
-    //   });
-    // });
   }
 
   openDialog(): void {
@@ -41,8 +38,7 @@ export class ReadingDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( (quoteNote: QuoteNote) => {
       quoteNote.created = new Date();
-      this.reading.quoteNotes.push(quoteNote);
-      this.readingsService.updateReading(this.reading)
+      this.readingsService.addNoteToReading(this.reading, quoteNote)
     })
   }
 }

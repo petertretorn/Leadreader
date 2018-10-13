@@ -15,7 +15,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadingsComponent implements OnInit {
   
-  // readings$: Observable<Reading[]>
   readings: Reading[]
   currentReading: Reading = null
 
@@ -29,18 +28,12 @@ export class ReadingsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const userId = params.get("userId");
-      // this.readings$ = this.readingsService.getReadigsForUser(userId)
 
       this.readingsService.getReadigsForUser(userId).subscribe(readings => {
         this.readings = readings
       })
     })
   }
-
-  // gotoReading(id) {
-  //   this.currentReading = 
-  //   this.router.navigate([`/app/reading-detail/${id}`])
-  // }
 
   editProfile() {
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -53,6 +46,11 @@ export class ReadingsComponent implements OnInit {
         this.auth.updateUser(user).then(res => console.log('usesr updated'))
       }
     })
+  }
+
+  deleteNote(noteId: string) {
+    this.currentReading.quoteNotes = this.currentReading.quoteNotes.filter(qn => qn.id !== noteId)
+    this.readingsService.updateReading(this.currentReading)
   }
 
 }

@@ -14,6 +14,11 @@
 }
 
 .posted-date {
-    margin-top: 10px;
     font-size: 0.7rem;
+}
+
+.meta {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between
 }

@@ -1,20 +1,26 @@
 <div class="note-section">
 
-    <h3>Reading Space for {{reading.book.title}}</h3>
+  <h3>Reading Space for {{reading.book.title}}</h3>
 
-    <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
-      <div class="quote">
-        {{ qn.quote}}
-      </div>
-      <br>
-      <div class="note">
-        {{ qn.note}}
-      </div>
+  <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
+    <div class="quote">
+      {{ qn.quote}}
+    </div>
+    <br>
+    <div class="note">
+      {{ qn.note}}
+    </div>
+    <div class="meta">
       <div class="posted-date">
         Posted {{ qn.created | date }}
       </div>
+      <div class="clickable" (click)="deleteNote.emit(qn.id)">
+          <i class="far fa-trash-alt"></i>
+      </div>
     </div>
-    <div>
-      <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
-    </div>
+
   </div>
+  <div>
+    <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
+  </div>
+</div>

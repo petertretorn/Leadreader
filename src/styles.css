@@ -13,3 +13,7 @@ body {
   overflow: hidden;
   margin: 20px auto;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}
