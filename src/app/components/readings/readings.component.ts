@@ -1,3 +1,11 @@
+import { User } from './../../models/user';
+import { UserDialogComponent } from './../user-dialog/user-dialog.component';
+import { MatDialog } from '@angular/material';
+import { AuthService } from './../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Reading } from './../../models/reading';
+import { Observable } from 'rxjs/internal/Observable';
+import { ReadingsService } from './../../services/readings.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +14,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./readings.component.css']
 })
 export class ReadingsComponent implements OnInit {
+  
+  readings$: Observable<Reading[]>;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private readingsService: ReadingsService, 
+    private router: Router,
+    public auth: AuthService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const userId = params.get("userId");
+      this.readings$ = this.readingsService.getReadigsForUser(userId)
+    });
+  }
+
+  gotoReading(id) {
+    this.router.navigate([`/app/reading-detail/${id}`])
+  }
+
+  editProfile() {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '500px',
+      data: this.auth.user
+    });
+
+    dialogRef.afterClosed().subscribe( (user: User) => {
+      if (!!user) {
+        this.auth.updateUser(user).then(res => console.log('usesr updated'))
+      }
+    })
   }
 
 }

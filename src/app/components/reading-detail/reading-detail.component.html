@@ -1,9 +1,12 @@
 <div *ngIf="!!reading">
-  <h3>Your Reading Space for {{ reading.book.title }} by {{ reading.book.author }}</h3>
-
   <div class="reading-container">
-    <div class="book-detals">
-      <img [src]="reading.book.imageUrl" alt="book cover">
+    
+    <div class="book">
+        <img [src]="reading.book.imageUrl" alt="book cover">
+        <div class="book-info">
+            <span class="title">{{ reading.book.title }}</span>
+            <span class="author">{{ reading.book.author }}</span>
+          </div>
     </div>
 
     <div class="note-section">

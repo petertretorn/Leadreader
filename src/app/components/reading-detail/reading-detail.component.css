@@ -9,23 +9,21 @@ img {
   grid-template-columns: 1fr 3fr;
   grid-gap: 40px;
 }
-
-/* .new {
-    width: 300px;
-}
-
-.new textarea {
-    width: 300px;
-} */
-
-/* .mat-form-field {
-    display: block;
-}
-
-.btn-wrapper {
+ 
+.book {
     display: flex;
-    justify-content: flex-end;
-} */
+    flex-direction: column;
+}
+.book-info {
+    display: flex;
+    flex-direction: column;
+    height: 3rem;
+    justify-content: space-around
+}
+
+.book-info .author {
+    font-size: 0.8rem;
+}
 
 .quote {
     font-style: oblique;
@@ -39,9 +37,7 @@ img {
 }
 
 .note-section {
-    border: 1px solid;
     border-radius: 3px;
-    padding: 15px;
 }
 
 .posted-date {

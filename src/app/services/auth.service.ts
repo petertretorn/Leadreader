@@ -1,4 +1,4 @@
-import { User } from "./../models/reader";
+import { User } from "./../models/user";
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -17,27 +17,47 @@ import { AngularFireAuth } from "@angular/fire/auth";
   providedIn: "root"
 })
 export class AuthService {
-  user: Observable<User | null>;
+  user$: Observable<User | null>;
+  user: User | null;
+
+  userId: string = null;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    this.user = this.afAuth.authState.pipe(
+    this.user$ = this.afAuth.authState.pipe(
+      tap( user => console.log('auth', user )),
       switchMap(user => {
         if (user) {
+          console.log('setting userid', user.uid)
+          this.userId = user.uid
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
-      })
-      // tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      }),
+      tap(user => localStorage.setItem('user', JSON.stringify(user)))
+      
       // startWith(JSON.parse(localStorage.getItem('user')))
     );
+
+    this.user$.pipe(
+      filter(user => !!user)
+    ).subscribe(user => {
+      this.user = user
+      this.userId = user.uid
+    })
   }
 
-  ////// OAuth Methods /////
+  updateUser(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${user.uid}`
+    );
+
+    return userRef.set(user).then(res => console.log('usesr updated'))
+  }
 
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
@@ -68,8 +88,6 @@ export class AuthService {
       .catch(error => this.handleError(error));
   }
 
-  //// Anonymous Auth ////
-
   anonymousLogin() {
     return this.afAuth.auth
       .signInAnonymously()
@@ -80,8 +98,6 @@ export class AuthService {
         this.handleError(error);
       });
   }
-
-  //// Email/Password Auth ////
 
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth
@@ -101,7 +117,6 @@ export class AuthService {
       .catch(error => this.handleError(error));
   }
 
-  // Sends email allowing user to reset password
   resetPassword(email: string) {
     const fbAuth = auth();
 
@@ -121,7 +136,6 @@ export class AuthService {
     console.error(error);
   }
 
-  // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
@@ -131,7 +145,8 @@ export class AuthService {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName || "nameless user",
-      photoURL: user.photoURL || "https://goo.gl/Fz9nrQ"
+      photoURL: user.photoURL || "https://goo.gl/Fz9nrQ",
+
     };
     return userRef.set(data);
   }

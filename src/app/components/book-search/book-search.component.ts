@@ -1,5 +1,5 @@
+import { ReadingsService } from './../../services/readings.service';
 import { Router } from '@angular/router';
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from "@angular/core";
 import { GoogleApiService } from "../../services/google-api.service";
 import { fromEvent } from "rxjs";
@@ -11,6 +11,7 @@ import { switchMap } from "rxjs/internal/operators/switchMap";
 import { tap } from "rxjs/internal/operators/tap";
 import { Key } from "selenium-webdriver";
 import { Book } from '../../models/book';
+import { Reading } from '../../models/reading';
 
 @Component({
   selector: "lr-book-search",
@@ -22,7 +23,7 @@ export class BookSearchComponent implements OnInit {
   searchTerm: string;
   constructor(
     private apiService: GoogleApiService, 
-    private userService: UserService,
+    private readingsService: ReadingsService,
     private router: Router) {}
 
   ngOnInit() {}
@@ -53,9 +54,10 @@ export class BookSearchComponent implements OnInit {
     let imageUrl = volumeInfo.imageLinks.thumbnail
 
     let book = new Book(title, author, categories, imageUrl)
+    let reading = new Reading(book)
 
-    this.userService.createReading(book).subscribe(
-      reading => this.router.navigate([`/app/readings/${reading.id}`])
+    this.readingsService.createReading(reading).subscribe(
+      reading => this.router.navigate([`/app/reading-detail/${reading.id}`])
     )
   }
 }

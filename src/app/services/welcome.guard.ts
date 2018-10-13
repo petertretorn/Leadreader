@@ -1,4 +1,4 @@
-import { User } from './../models/reader';
+import { User } from './../models/user';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
@@ -17,7 +17,7 @@ export class WelcomeGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.user.pipe(
+    return this.auth.user$.pipe(
       take(1),
       map(user => !user),
       tap(notloggedIn => {

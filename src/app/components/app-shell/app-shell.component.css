@@ -6,3 +6,15 @@ mat-toolbar {
     display: flex;
     justify-content: space-between
 }
+
+.mat-toolbar.mat-primary {
+    background:#999;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 3rem;
+}
+
+.logo-text {
+    text-transform: initial;
+}

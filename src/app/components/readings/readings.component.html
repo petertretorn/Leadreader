@@ -1,3 +1,27 @@
-<p>
-  readings works!
-</p>
+<div class="main">
+  <div *ngIf="auth.user$ | async as user" class="profile-section">
+    <img class="profile-image" [src]="user.photoURL" alt="profile picture">
+    <div class="profile-details">
+      <div class="master-data">{{user.fullName}}, {{user.country}}</div>
+      <div class="info-pair">
+        <span class="property">Favorite Book</span>
+        <span>{{user.favoriteBook}}</span>
+      </div>
+      <div class="info-pair">
+          <span class="property">Favorite Quote</span>
+          <span>I just don't care</span>
+        </div>
+    </div>
+    <button (click)="editProfile()" mat-button mat-raised-button color="secondary"><i class="fas fa-user-edit"></i>&nbsp;&nbsp;Edit Profile</button>
+  </div>
+  <div class="readings-section">
+    <h3>Your Readings</h3>
+    <div class="reading" *ngFor="let reading of readings$ | async" (click)="gotoReading(reading.id)">
+      <div class="reading-details">
+        <span class="title">{{reading.book.title}}</span>
+        <span class="author">{{reading.book.author}}</span>
+      </div>
+      <img [src]="reading.book.imageUrl" alt="book cover">
+    </div>
+  </div>
+</div>

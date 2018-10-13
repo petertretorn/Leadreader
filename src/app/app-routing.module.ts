@@ -12,9 +12,10 @@ const routes: Routes = [
     path: 'app', 
     component: AppShellComponent,
     children: [
+      { path: 'home', component: BookSearchComponent },    
       { path: 'search-book', component: BookSearchComponent },    
-      { path: 'readings', component: ReadingsComponent },
-      { path: 'readings/:id', component: ReadingDetailComponent }, 
+      { path: 'readings/:userId', component: ReadingsComponent },
+      { path: 'reading-detail/:id', component: ReadingDetailComponent }, 
     ]
   },
   { path: 'welcome', component: WelcomeComponent, canActivate: [WelcomeGuard] },

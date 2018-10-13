@@ -18,10 +18,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { environment } from '../environments/environment';
-
-
+import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +29,8 @@ import { environment } from '../environments/environment';
     AppShellComponent,
     ReadingsComponent,
     ReadingDetailComponent,
-    NoteDialogComponent
+    NoteDialogComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +45,8 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule
   ],
   entryComponents: [
-    NoteDialogComponent
+    NoteDialogComponent,
+    UserDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

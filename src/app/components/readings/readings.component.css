@@ -1,0 +1,70 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.profile-section {
+    margin-top: 1.2rem;
+}
+
+.profile-image {
+    width: 17rem;
+    height: auto;
+    border-radius: 5px;
+    border: 1.5px solid rgb(100, 83, 83);
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    height: 6.5rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.profile-details .master-data {
+    font-size: 0.8rem;
+}
+
+.info-pair {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+.info-pair .property {
+    font-size: 0.7rem;
+}
+
+.reading {
+    width: 450px;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
+    padding-left: 1rem;
+}
+
+.reading img {
+    width: 3rem;
+    height: auto;
+    margin-right: 1.5rem;
+}
+
+.reading .reading-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 3rem;
+}
+
+.reading .reading-details .author {
+    font-size: 0.8rem;
+}
+
+.reading:hover {
+    background-color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+}

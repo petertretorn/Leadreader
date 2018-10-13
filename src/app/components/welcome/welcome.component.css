@@ -33,6 +33,7 @@
 }
 
 .join {
+    text-align: center;
     margin: 40px auto;
-    width: 100px; 
+    width: 300px; 
 }

@@ -1,0 +1,21 @@
+<div class="new">
+    <div>
+      <mat-form-field>
+        <input [(ngModel)]="user.fullName"name="quote" matInput placeholder="Full name"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input [(ngModel)]="user.favoriteBook" name="note" matInput placeholder="FavoriteBook"/>
+      </mat-form-field>  
+    </div>
+    <div>
+        <mat-form-field>
+          <input [(ngModel)]="user.country" name="note" matInput placeholder="Country"/>
+        </mat-form-field>  
+      </div>
+    <div class="btn-wrapper">
+      <button (click)="save()" mat-button mat-raised-button color="primary">SAVE</button>
+      <button (click)="cancel()" mat-button mat-raised-button>CANCEL</button>
+    </div>
+  </div>
