@@ -49,6 +49,7 @@ export class ReadingsComponent implements OnInit {
   }
 
   deleteNote(noteId: string) {
+    console.log('deleteNote')
     this.currentReading.quoteNotes = this.currentReading.quoteNotes.filter(qn => qn.id !== noteId)
     this.readingsService.updateReading(this.currentReading)
   }

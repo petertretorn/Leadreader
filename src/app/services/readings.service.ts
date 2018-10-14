@@ -46,10 +46,13 @@ export class ReadingsService {
   addNoteToReading(reading: Reading, note: QuoteNote) {
     note.id = this.afs.createId()
     
-    reading.quoteNotes = reading.quoteNotes || []
-    reading.quoteNotes.push(note)
+    // reading.quoteNotes = reading.quoteNotes || []
+    // reading.quoteNotes.push(note)
 
-    this.updateReading(reading)
+    let clone = { ...reading }
+    clone.quoteNotes.push(note)
+
+    this.updateReading(clone)
   }
 
   updateReading(reading: Reading) {
