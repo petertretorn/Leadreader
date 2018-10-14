@@ -17,3 +17,15 @@ body {
 .clickable:hover {
   cursor: pointer;
 }
+
+.info-pair {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+.info-pair--property {
+    font-size: 0.7rem;
+}
+
+[hidden=true] { display: none !important;}

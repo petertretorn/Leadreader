@@ -53,4 +53,8 @@ export class ReadingsComponent implements OnInit {
     this.readingsService.updateReading(this.currentReading)
   }
 
+  updateReading(reading: Reading) {
+    this.readingsService.updateReading(reading)
+  }
+
 }

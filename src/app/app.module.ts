@@ -20,6 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { DefaultValuePipe } from './default-value.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
     ReadingsComponent,
     ReadingDetailComponent,
     NoteDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    DefaultValuePipe
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,78 @@
 <div class="note-section">
 
-  <h3>Reading Space for {{reading.book.title}}</h3>
+  <h3>Reading Space</h3>
+
+  <div class="book">
+
+    <div class="book--info">
+
+      <div class="info-pair">
+        <span class="info-pair--property">Author</span>
+        <span>{{reading.book.author | defaultValue}}</span>
+      </div>
+      <div class="info-pair">
+        <span class="info-pair--property">Title</span>
+        <span>{{ reading.book.title | defaultValue }}</span>
+      </div>
+      <div class="info-pair">
+        <span class="info-pair--property">Category</span>
+        <span>{{ reading.book.categories | defaultValue }}</span>
+      </div>
+      <div class="info-pair">
+        <span class="info-pair--property">Publisher</span>
+        <span>{{ reading.book.publisher | defaultValue }}</span>
+      </div>
+      <div class="info-pair">
+        <span class="info-pair--property">Year Published</span>
+        <span>{{ reading.book.published | date | defaultValue }}</span>
+      </div>
+
+    </div>
+
+    <img [src]="reading.book.imageUrl" alt="">
+
+  </div>
 
   <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
-    <div class="quote">
+
+    <div *ngIf="!isInEditMode[qn.id]" class="quote">
       {{ qn.quote}}
     </div>
+
     <br>
-    <div class="note">
+
+    <div *ngIf="!isInEditMode[qn.id]" class="note">
       {{ qn.note}}
     </div>
-    <div class="meta">
+
+    <textarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote" name="quote" matInput
+      placeholder="quote">
+    </textarea>
+
+    <textarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note" name="note" matInput
+      placeholder="notes"></textarea>
+
+    <div class="quote-info">
+
       <div class="posted-date">
         Posted {{ qn.created | date }}
       </div>
-      <div class="clickable" (click)="deleteNote.emit(qn.id)">
-          <i class="far fa-trash-alt"></i>
+
+      <div>
+        <span *ngIf="isInEditMode[qn.id]">
+          <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
+          <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
+        </span>
+        <span *ngIf="!isInEditMode[qn.id]">
+          <i (click)="editNote(qn.id)" class="clickable fas fa-edit"></i>&nbsp;
+          <i (click)="deleteNote.emit(qn.id)" class="clickable far fa-trash-alt"></i>
+        </span>
       </div>
+
     </div>
 
   </div>
+
   <div>
     <button mat-raised-button (click)="openDialog()">NEW NOTE</button>
   </div>

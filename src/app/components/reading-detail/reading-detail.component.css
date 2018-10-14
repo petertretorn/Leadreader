@@ -17,8 +17,33 @@
     font-size: 0.7rem;
 }
 
-.meta {
+.quote-info {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between
+}
+
+.book {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.book img {
+    width: 8rem;
+    height: auto;
+}
+
+
+
+textarea[name="quote"] {
+    font-style: oblique;
+}
+
+textarea {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    display: block;
+    width: 95%;
+    border-radius: 10px;
 }

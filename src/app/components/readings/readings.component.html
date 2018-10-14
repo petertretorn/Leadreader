@@ -5,11 +5,11 @@
     <div class="profile-details">
       <div class="master-data">{{user.fullName}}, {{user.country}}</div>
       <div class="info-pair">
-        <span class="property">Favorite Book</span>
+        <span class="info-pair--property">Favorite Book</span>
         <span>{{user.favoriteBook}}</span>
       </div>
       <div class="info-pair">
-        <span class="property">Favorite Quote</span>
+        <span class="info-pair--property">Favorite Quote</span>
         <span>I just don't care</span>
       </div>
     </div>
@@ -35,7 +35,8 @@
   <div>
     <lr-reading-detail *ngIf="!!currentReading" 
       [reading]="currentReading" 
-      (deleteNote)="deleteNote($event)">
+      (deleteNote)="deleteNote($event)"
+      (updateReading)="updateReading($event)">
     </lr-reading-detail>
   </div>
 

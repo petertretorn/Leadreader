@@ -1,3 +1,5 @@
+import { auth } from 'firebase';
+import { AuthService } from './../../services/auth.service';
 import { ReadingsService } from './../../services/readings.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from "@angular/core";
@@ -24,6 +26,7 @@ export class BookSearchComponent implements OnInit {
   constructor(
     private apiService: GoogleApiService, 
     private readingsService: ReadingsService,
+    public auth: AuthService,
     private router: Router) {}
 
   ngOnInit() {}
@@ -52,12 +55,14 @@ export class BookSearchComponent implements OnInit {
     let author = !!volumeInfo.authors ? volumeInfo.authors.join(', ') : 'no author'
     let categories = !!volumeInfo.categories ? volumeInfo.categories.join(', ') : ''
     let imageUrl = volumeInfo.imageLinks.thumbnail
+    const published = !!volumeInfo.publishedDate ? new Date(volumeInfo.publishedDate) : null
+    const publisher = !!volumeInfo.publisher ? volumeInfo.publisher : 'publisher n/a'
 
-    let book = new Book(title, author, categories, imageUrl)
+    let book = new Book(title, author, categories, imageUrl, published, publisher)
     let reading = new Reading(book)
 
     this.readingsService.createReading(reading).subscribe(
-      reading => this.router.navigate([`/app/reading-detail/${reading.id}`])
+      reading => this.router.navigate([`/app/readings/${this.auth.user.uid}`])
     )
   }
 }
