@@ -21,11 +21,16 @@
 
     <h3>Readings</h3>
 
-    <div class="reading" *ngFor="let reading of readings" (click)="currentReading = reading">
+    <div class="reading" 
+      [ngClass]="{'reading__active': currentReading === reading}" 
+      *ngFor="let reading of readings" 
+      (click)="currentReading = reading">
+      
       <div class="reading-details">
         <span class="title">{{reading.book.title}}</span>
         <span class="author">{{reading.book.author}}</span>
       </div>
+      
       <img [src]="reading.book.imageUrl" alt="book cover">
 
     </div>

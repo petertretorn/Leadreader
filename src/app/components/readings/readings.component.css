@@ -33,7 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s;
+    transition: all 0.2s;
     padding-left: 1rem;
 }
 
@@ -55,6 +55,12 @@
 }
 
 .reading:hover {
+    background-color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reading__active {
     background-color: beige;
     border-radius: 5px;
     cursor: pointer;
