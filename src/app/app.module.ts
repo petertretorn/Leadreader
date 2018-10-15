@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +23,7 @@ import { environment } from '../environments/environment';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { DefaultValuePipe } from './default-value.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { ReadingsListComponent } from './components/readings-list/readings-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ReadingDetailComponent,
     NoteDialogComponent,
     UserDialogComponent,
-    DefaultValuePipe
+    DefaultValuePipe,
+    UserComponent,
+    ReadingsListComponent
   ],
   imports: [
     BrowserModule,

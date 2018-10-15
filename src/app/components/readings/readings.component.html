@@ -1,49 +1,13 @@
 <div class="main">
 
-  <div *ngIf="auth.user$ | async as user" class="profile-section">
-    <img class="profile-image" [src]="user.photoURL" alt="profile picture">
-    <div class="profile-details">
-      <div class="master-data">{{user.fullName}}, {{user.country}}</div>
-      <div class="info-pair">
-        <span class="info-pair--property">Favorite Book</span>
-        <span>{{user.favoriteBook}}</span>
-      </div>
-      <div class="info-pair">
-        <span class="info-pair--property">Favorite Quote</span>
-        <span>I just don't care</span>
-      </div>
-    </div>
-    <button (click)="editProfile()" mat-button mat-raised-button color="secondary">
-      <i class="fas fa-user-edit"></i>&nbsp;&nbsp;Edit Profile</button>
-  </div>
+  <lr-user *ngIf="auth.user$ | async as user" [user]="user" (edit)="editProfile($event)"></lr-user>
 
-  <div *ngIf="!!readings" class="readings-section">
-
-    <div class="header-readings">
-      <h3>Readings</h3>
-      <a [routerLink]="['search-book']" class="new-reading">
-        NEW
-        <i class="fas fa-plus-circle"></i>
-      </a>
-    </div>
-
-    <div class="reading" [ngClass]="{'reading__active': currentReading?.id === reading.id}" *ngFor="let reading of readings"
-      (click)="!isDeleting ? currentReading = reading: null">
-
-      <div class="reading-details">
-        <span class="title">{{reading.book.title}}</span>
-        <span class="author">{{reading.book.author}}</span>
-        <div class="tooltip">
-          <i (click)="isDeleting = true; deleteReading(reading)" class="delete clickable far fa-trash-alt"></i>
-          <span class="tooltiptext">delete</span>
-        </div>
-      </div>
-
-      <img [src]="reading.book.imageUrl" alt="book cover">
-
-    </div>
-
-  </div>
+  <lr-readings-list *ngIf="!!readings" 
+  [readings]="readings" 
+  [currentReading]="currentReading" 
+  (deleteReading)="deleteReading($event)"
+  (selectReading)="selectReading($event)">
+  </lr-readings-list>
 
   <div *ngIf="!!currentReading" class="current-reading">
     <lr-reading-detail *ngIf="!!currentReading" [reading]="currentReading" (deleteNote)="deleteNote($event)" (updateReading)="updateReading($event)">

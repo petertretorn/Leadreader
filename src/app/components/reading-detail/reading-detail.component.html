@@ -44,11 +44,11 @@
     </div>
 
     <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote"
-      name="quote" wrap="hard" matInput placeholder="quote">
+      name="quote" wrap="hard" placeholder="quote">
     </textarea>
 
     <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note"
-      name="note" wrap="hard" matInput placeholder="notes"></textarea>
+      name="note" wrap="hard" placeholder="notes"></textarea>
 
     <div class="quote-info">
 

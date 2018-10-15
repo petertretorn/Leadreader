@@ -1,0 +1,59 @@
+.header-readings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-reading {
+  padding: 0.4rem;
+  background: tomato;
+  border-radius: 10px;
+}
+
+.reading {
+  width: 320px;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+  padding-left: 1rem;
+  margin-bottom: 0.3rem;
+
+  img {
+    width: 3rem;
+    height: auto;
+    margin-right: 1.5rem;
+  }
+
+  .delete {
+    display: none;
+  }
+
+  &:hover .delete {
+    display: block;
+  }
+}
+
+.reading-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 4rem;
+ 
+  .author {
+    font-size: 0.9rem;
+  }
+}
+
+.reading:hover {
+  background-color: beige;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reading__active {
+  background-color: beige;
+  border-radius: 5px;
+  cursor: pointer;
+}
