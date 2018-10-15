@@ -49,20 +49,20 @@
   transition: all 0.2s;
   padding-left: 1rem;
   margin-bottom: 0.3rem;
-}
 
-.reading:hover .delete {
-  display: block;
-}
+  img {
+    width: 3rem;
+    height: auto;
+    margin-right: 1.5rem;
+  }
 
-.reading img {
-  width: 3rem;
-  height: auto;
-  margin-right: 1.5rem;
-}
+  .delete {
+    display: none;
+  }
 
-.delete {
-  display: none;
+  &:hover .delete {
+    display: block;
+  }
 }
 
 .reading-details {
@@ -70,11 +70,15 @@
   flex-direction: column;
   justify-content: space-around;
   height: 4rem;
+
+  .author  {
+    font-size: 0.9rem;
+  }
 }
 
-.reading-details .author {
-  font-size: 0.9rem;
-}
+// .reading-details .author {
+//   font-size: 0.9rem;
+// }
 
 .reading:hover {
   background-color: beige;

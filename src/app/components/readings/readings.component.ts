@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lr-readings',
   templateUrl: './readings.component.html',
-  styleUrls: ['./readings.component.css']
+  styleUrls: ['./readings.component.scss']
 })
 export class ReadingsComponent implements OnInit {
   

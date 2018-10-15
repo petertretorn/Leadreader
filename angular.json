@@ -145,5 +145,10 @@
       }
     }
   },
-  "defaultProject": "leadreader"
+  "defaultProject": "leadreader",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
