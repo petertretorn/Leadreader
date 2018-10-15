@@ -10,6 +10,7 @@
   margin-bottom: -50px;
   background: #999;
   height: 3rem;
+  z-index: 1;
 }
 
 .header--content {
@@ -20,11 +21,16 @@
   height: 3rem;
 }
 
-.mat-toolbar-row,
-.mat-toolbar-single-row {
-  height: 3rem;
+.menu--item {
+  display: none;
 }
 
 .logo-text {
   text-transform: initial;
+}
+
+@media (max-width: 560px) {
+  .menu--item {
+    display: block;
+  }  
 }

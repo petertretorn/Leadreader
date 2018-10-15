@@ -1,4 +1,4 @@
-<div class="main">
+<div class="grid">
 
   <lr-user *ngIf="auth.user$ | async as user" [user]="user" (edit)="editProfile($event)"></lr-user>
 

@@ -24,6 +24,7 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
 import { DefaultValuePipe } from './default-value.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ReadingsListComponent } from './components/readings-list/readings-list.component';
+import { MobileUserComponent } from './components/mobile-user/mobile-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ReadingsListComponent } from './components/readings-list/readings-list.
     UserDialogComponent,
     DefaultValuePipe,
     UserComponent,
-    ReadingsListComponent
+    ReadingsListComponent,
+    MobileUserComponent
   ],
   imports: [
     BrowserModule,

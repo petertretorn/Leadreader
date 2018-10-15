@@ -18,7 +18,7 @@ declare var tinymce: any;
 @Component({
   selector: "lr-reading-detail",
   templateUrl: "./reading-detail.component.html",
-  styleUrls: ["./reading-detail.component.css"]
+  styleUrls: ["./reading-detail.component.scss"]
 })
 export class ReadingDetailComponent implements OnInit  {
   @Input()

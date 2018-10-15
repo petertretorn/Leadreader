@@ -1,3 +1,4 @@
+import { MobileUserComponent } from './components/mobile-user/mobile-user.component';
 import { ReadingsResolver } from "./utils/readings.resolver";
 import { WelcomeGuard } from "./services/welcome.guard";
 import { ReadingsComponent } from "./components/readings/readings.component";
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: "home",
         component: BookSearchComponent
+      },
+      {
+        path: "profile",
+        component: MobileUserComponent
       },
       {
         path: "search-book",

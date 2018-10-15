@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'lr-app-shell',
   templateUrl: './app-shell.component.html',
-  styleUrls: ['./app-shell.component.css']
+  styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent implements OnInit {
 

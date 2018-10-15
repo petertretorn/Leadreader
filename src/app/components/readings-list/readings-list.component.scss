@@ -20,29 +20,29 @@
   padding-left: 1rem;
   margin-bottom: 0.3rem;
 
+  &:hover .book-info .delete {
+    display: block;
+  }
+
   img {
     width: 3rem;
     height: auto;
     margin-right: 1.5rem;
   }
 
-  .delete {
-    display: none;
-  }
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 4rem;
 
-  &:hover .delete {
-    display: block;
-  }
-}
+    .author {
+      font-size: 0.9rem;
+    }
 
-.reading-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 4rem;
- 
-  .author {
-    font-size: 0.9rem;
+    .delete {
+      display: none;
+    }
   }
 }
 
@@ -56,4 +56,23 @@
   background-color: beige;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Small Screens */
+@media (max-width: 560px) {
+  .reading {
+    width: 100%;
+
+    .title {
+      font-size: 0.9rem;
+    }
+
+    .author {
+      font-size: 0.8rem;
+    }
+  }
+
+  .delete {
+    display: block;
+  }
 }

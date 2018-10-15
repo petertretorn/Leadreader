@@ -50,3 +50,11 @@ textarea {
   width: 95%;
   border-radius: 10px;
 }
+
+
+/* Small Screens */
+@media (max-width: 560px) {
+  .book--image__is-mobile {
+    display: none !important;
+  }
+}
