@@ -9,13 +9,18 @@ import { Input } from "@angular/core";
 import { Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { NgZone } from "@angular/core";
+import { AfterViewInit } from '@angular/core';
+import { OnDestroy } from '@angular/core';
+
+
+declare var tinymce: any;
 
 @Component({
   selector: "lr-reading-detail",
   templateUrl: "./reading-detail.component.html",
   styleUrls: ["./reading-detail.component.css"]
 })
-export class ReadingDetailComponent implements OnInit {
+export class ReadingDetailComponent implements OnInit  {
   @Input()
   reading: Reading;
 
@@ -25,38 +30,31 @@ export class ReadingDetailComponent implements OnInit {
   @Output()
   public updateReading = new EventEmitter<Reading>();
 
-  // @Output()
-  // public addNoteToReading = new EventEmitter<Reading>();
+  @Output() onEditorKeyup = new EventEmitter<any>();
+  public editor:any;
 
   isEditingNote: boolean = false;
-
   isInEditMode = {}
-
-  isNew: boolean = false
-
   newQuote: QuoteNote = null
+  content: string
 
   constructor(
     private route: ActivatedRoute,
     private readingsService: ReadingsService,
     public dialog: MatDialog,
     private ngZone: NgZone
+    
   ) {  }
 
   ngOnInit() {
-    this.reading.quoteNotes = this.reading.quoteNotes || [];
-
-    this.reading = { ...this.reading }
   }
 
   editNote(noteId: string) {
-    console.log('editNote', noteId)
     this.isInEditMode[noteId] = true
     this.autogrowTextareas()
   }
 
   saveNote(noteId: string) {
-    console.log('saveNote', noteId)
     this.isInEditMode[noteId] = false
     this.updateReading.emit(this.reading)
   }
@@ -74,38 +72,14 @@ export class ReadingDetailComponent implements OnInit {
   }
  
   addNewNote() {
-    this.isNew = true;
     this.newQuote = new QuoteNote()
   }
 
-  save() {
-    this.isNew = false;
-
+  saveNewNote() {
+    this.reading.quoteNotes = this.reading.quoteNotes || [];
     this.newQuote.created = new Date();
     this.readingsService.addNoteToReading(this.reading , this.newQuote)
 
     this.newQuote = null
-  }
-
-  openDialog(): void {
-    
-    const dialogRef = this.dialog.open(NoteDialogComponent, {
-      width: "500px"
-    });
-
-    dialogRef.afterClosed().subscribe((quoteNote: QuoteNote) => {
-      if (!quoteNote) return
-
-      this.ngZone.run( () => {
-        quoteNote.created = new Date();
-        //this.reading.quoteNotes.push(quoteNote)
-        // this.updateReading.emit(this.reading)
-  
-        quoteNote.created = new Date();
-        this.readingsService.addNoteToReading({ ...this.reading }, quoteNote)
-      })
-      
-
-    });
   }
 }

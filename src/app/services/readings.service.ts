@@ -63,6 +63,10 @@ export class ReadingsService {
     return this.readingsCollection.doc(id).valueChanges() as Observable<Reading>
   }
 
+  deleteReading(reading: Reading) {
+    return this.afs.doc<Reading>(`readings/${reading.id}`).delete()
+  }
+
   private makePureJSObject(reading) {
     return JSON.parse( JSON.stringify(reading) )
   }

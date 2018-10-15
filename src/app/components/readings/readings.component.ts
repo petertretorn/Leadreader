@@ -17,6 +17,7 @@ export class ReadingsComponent implements OnInit {
   
   readings: Reading[]
   currentReading: Reading = null
+  isDeleting: boolean = false
 
   constructor(
     private route: ActivatedRoute,
@@ -49,9 +50,14 @@ export class ReadingsComponent implements OnInit {
   }
 
   deleteNote(noteId: string) {
-    console.log('deleteNote')
     this.currentReading.quoteNotes = this.currentReading.quoteNotes.filter(qn => qn.id !== noteId)
     this.readingsService.updateReading(this.currentReading)
+  }
+
+  deleteReading(reading: Reading) {
+    this.currentReading = null
+    
+    this.readingsService.deleteReading(reading).then( () => this.isDeleting = false);
   }
 
   updateReading(reading: Reading) {

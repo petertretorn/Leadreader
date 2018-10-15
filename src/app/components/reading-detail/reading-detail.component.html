@@ -35,24 +35,20 @@
 
   <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
 
-    <div *ngIf="!isInEditMode[qn.id]" class="quote">
-      {{ qn.quote}}
+    <div *ngIf="!isInEditMode[qn.id]" class="quote" [innerHTML]="qn.quote">
     </div>
 
     <br>
 
-    <div *ngIf="!isInEditMode[qn.id]" class="note">
-      {{ qn.note}}
+    <div *ngIf="!isInEditMode[qn.id]" class="note" [innerHTML]="qn.note">
     </div>
 
-
-
     <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote"
-      name="quote" matInput placeholder="quote">
+      name="quote" wrap="hard" matInput placeholder="quote">
     </textarea>
 
     <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note"
-      name="note" matInput placeholder="notes"></textarea>
+      name="note" wrap="hard" matInput placeholder="notes"></textarea>
 
     <div class="quote-info">
 
@@ -80,33 +76,14 @@
   </div>
 
   <div class="new-note" *ngIf="!!newQuote">
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isNew}"[(ngModel)]="newQuote.quote" name="quote"
-      matInput placeholder="quote">
+    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard" placeholder="quote">
     </textarea>
 
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isNew}" [(ngModel)]="newQuote.note" name="note"
-      matInput placeholder="notes"></textarea>
+    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard" placeholder="notes"></textarea>
 
     <div>
-      <button mat-raised-button (click)="save()">Save</button>
+      <button mat-raised-button (click)="saveNewNote()">Save</button>
     </div>
   </div>
 
-
-  <!-- <ng-container *ngTemplateOutlet></ng-container> -->
-
 </div>
-<!-- 
-<ng-template #noteEdit>
-  <textarea (keyup)="autogrowTextareas()" class="visible" [(ngModel)]="newQuote.quote" name="quote" matInput placeholder="quote">
-  </textarea>
-
-  <textarea (keyup)="autogrowTextareas()" class="visible" [(ngModel)]="newQuote.note" name="note" matInput placeholder="notes"></textarea>
-
-  <div>
-    <span *ngIf="isInEditMode[qn.id]">
-      <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
-      <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
-    </span>
-  </div>
-</ng-template> -->

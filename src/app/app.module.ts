@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { DefaultValuePipe } from './default-value.pipe';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DefaultValuePipe } from './default-value.pipe';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    EditorModule
   ],
   entryComponents: [
     NoteDialogComponent,

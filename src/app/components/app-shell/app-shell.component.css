@@ -1,20 +1,30 @@
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-mat-toolbar {
-    display: flex;
-    justify-content: space-between
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: -50px;
+  background: #999;
+  height: 3rem;
 }
 
-.mat-toolbar.mat-primary {
-    background:#999;
+.header--content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  height: 3rem;
 }
 
-.mat-toolbar-row, .mat-toolbar-single-row {
-    height: 3rem;
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 3rem;
 }
 
 .logo-text {
-    text-transform: initial;
+  text-transform: initial;
 }

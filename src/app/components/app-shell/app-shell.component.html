@@ -1,33 +1,34 @@
-<mat-toolbar color="primary">
-  <div>
-    <i class="fas fa-book-reader"></i>
-    <span class="logo-text"> Leadreader</span>
+<div class="header">
+
+  <div class="header--content">
+    <div>
+      <i class="fas fa-book-reader"></i>
+      <span class="logo-text"> Leadreader</span>
+    </div>
+
+    <h3 class="menu-btn" mat-button [matMenuTriggerFor]="menu">
+      <i class="fas fa-bars"></i>
+    </h3>
+
+    
   </div>
 
-  <!-- <span class="spacer"></span> -->
-
-  <h3 class="menu-btn" mat-button [matMenuTriggerFor]="menu">
-    <i class="fas fa-bars"></i>
-  </h3>
-
-  <!-- <mat-icon>more_vert</mat-icon> -->
-
-</mat-toolbar>
+</div>
 
 <mat-menu #menu="matMenu">
-  <a mat-menu-item (click)="gotoHome()">
-    <i class="fas fa-home"></i>
-    <span> &nbsp;Home</span>
-  </a>
-  <a mat-menu-item [routerLink]="['search-book']">
-    <i class="fas fa-book"></i>
-    <span> &nbsp;&nbsp;Find Book</span>
-  </a>
-  <a mat-menu-item [routerLink]="['community']">
-    <i class="fas fa-users"></i>
-    <span> Community</span>
-  </a>
-</mat-menu>
+    <a mat-menu-item (click)="gotoHome()">
+      <i class="fas fa-home"></i>
+      <span> &nbsp;Home</span>
+    </a>
+    <a mat-menu-item [routerLink]="['search-book']">
+      <i class="fas fa-book"></i>
+      <span> &nbsp;&nbsp;Find Book</span>
+    </a>
+    <a mat-menu-item [routerLink]="['community']">
+      <i class="fas fa-users"></i>
+      <span> Community</span>
+    </a>
+  </mat-menu>
 
 <div class="container">
   <router-outlet></router-outlet>
