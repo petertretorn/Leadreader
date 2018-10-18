@@ -1,6 +1,6 @@
 import { QuoteNote } from './quote-note';
 import { Book } from './book';
-import { User } from './user';
+import { Reader } from './reader';
 export class Reading {
 
     constructor(book: Book) {
@@ -12,6 +12,6 @@ export class Reading {
     book: Book
     quoteNotes: QuoteNote[]
     isPrivate: boolean
-    owner: User
-    members: User[]
+    owner: Reader
+    members: Reader[]
 }

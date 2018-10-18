@@ -21,17 +21,12 @@ declare var tinymce: any;
   styleUrls: ["./reading-detail.component.scss"]
 })
 export class ReadingDetailComponent implements OnInit  {
-  @Input()
-  reading: Reading;
+  @Input() reading: Reading
+  @Input() isOwner: boolean
 
-  @Output()
-  public deleteNote = new EventEmitter<string>();
-
-  @Output()
-  public updateReading = new EventEmitter<Reading>();
-
+  @Output() public deleteNote = new EventEmitter<string>();
+  @Output() public updateReading = new EventEmitter<Reading>();
   @Output() onEditorKeyup = new EventEmitter<any>();
-  public editor:any;
 
   isEditingNote: boolean = false;
   isInEditMode = {}
@@ -47,6 +42,7 @@ export class ReadingDetailComponent implements OnInit  {
   ) {  }
 
   ngOnInit() {
+    
   }
 
   editNote(noteId: string) {

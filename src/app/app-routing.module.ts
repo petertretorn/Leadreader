@@ -1,3 +1,4 @@
+import { CommunityComponent } from './components/community/community.component';
 import { MobileUserComponent } from './components/mobile-user/mobile-user.component';
 import { ReadingsResolver } from "./utils/readings.resolver";
 import { WelcomeGuard } from "./services/welcome.guard";
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: "home",
         component: BookSearchComponent
+      },
+      {
+        path: "community",
+        component: CommunityComponent
       },
       {
         path: "profile",

@@ -1,39 +1,45 @@
-<div class="note-section">
+<div class="wrapper">
+  <div class="heading heading-bottom-margin">Reading Space</div>
 
-  <h3>Reading Space</h3>
+  <div class="reading-header">
 
-  <div class="book">
+    <div class="reading-header--book shadow">
 
-    <div class="book--info">
-
-      <div class="info-pair">
-        <span class="info-pair--property">Author</span>
-        <span>{{reading.book.author | defaultValue}}</span>
-      </div>
-      <div class="info-pair">
-        <span class="info-pair--property">Title</span>
-        <span>{{ reading.book.title | defaultValue }}</span>
-      </div>
-      <div class="info-pair">
-        <span class="info-pair--property">Category</span>
-        <span>{{ reading.book.categories | defaultValue }}</span>
-      </div>
-      <div class="info-pair">
-        <span class="info-pair--property">Publisher</span>
-        <span>{{ reading.book.publisher | defaultValue }}</span>
-      </div>
-      <div class="info-pair">
-        <span class="info-pair--property">Year Published</span>
-        <span>{{ reading.book.published | date | defaultValue }}</span>
+      <div>
+        <img class="shadow book--image__is-mobile" [src]="reading.book.imageUrl" alt="">
       </div>
 
+      <div>
+        <div class="info-pair">
+          <span class="info-pair--property">Author</span>
+          <span>{{reading.book.author | defaultValue}}</span>
+        </div>
+        <div class="info-pair">
+          <span class="info-pair--property">Title</span>
+          <span>{{ reading.book.title | defaultValue }}</span>
+        </div>
+        <div class="info-pair">
+          <span class="info-pair--property">Category</span>
+          <span>{{ reading.book.categories | defaultValue }}</span>
+        </div>
+        <div class="info-pair">
+          <span class="info-pair--property">Publisher</span>
+          <span>{{ reading.book.publisher | defaultValue }}</span>
+        </div>
+        <div class="info-pair">
+          <span class="info-pair--property">Year Published</span>
+          <span>{{ reading.book.published | date | defaultValue }}</span>
+        </div>
+      </div>
     </div>
 
-    <img class="book--image__is-mobile" [src]="reading.book.imageUrl" alt="">
+    <div class="reading-header--controls">
+      <mat-checkbox>Private</mat-checkbox>
+    </div>
 
   </div>
 
-  <div *ngFor="let qn of reading.quoteNotes" class="noteQuote">
+  <div *ngFor="let qn of reading.quoteNotes" class="noteQuote shadow">
 
     <div *ngIf="!isInEditMode[qn.id]" class="quote" [innerHTML]="qn.quote">
     </div>
@@ -56,7 +62,7 @@
         Posted {{ qn.created | date }}
       </div>
 
-      <div>
+      <div *ngIf="isOwner">
         <span *ngIf="isInEditMode[qn.id]">
           <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
           <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
@@ -72,18 +78,21 @@
   </div>
 
   <div>
-    <button *ngIf="!newQuote" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
+    <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
   </div>
 
-  <div class="new-note" *ngIf="!!newQuote">
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard" placeholder="quote">
+  <div class="new-note" *ngIf="!!newQuote && isOwner">
+    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard"
+      placeholder="quote">
     </textarea>
 
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard" placeholder="notes"></textarea>
+    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard"
+      placeholder="notes"></textarea>
 
     <div>
       <button mat-raised-button (click)="saveNewNote()">Save</button>
     </div>
   </div>
+
 
 </div>

@@ -26,7 +26,7 @@ export class ReadingsService {
   }
 
   createReading(reading: Reading): Observable<Reading> {
-    reading.userId = this.authService.userId;
+    reading.userId = this.authService.readerId;
 
     const id = this.afs.createId()
     

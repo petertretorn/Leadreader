@@ -18,7 +18,7 @@ import { Reading } from '../../models/reading';
 @Component({
   selector: "lr-book-search",
   templateUrl: "./book-search.component.html",
-  styleUrls: ["./book-search.component.css"]
+  styleUrls: ["./book-search.component.scss"]
 })
 export class BookSearchComponent implements OnInit {
   bookData: any[] = [];
@@ -63,7 +63,7 @@ export class BookSearchComponent implements OnInit {
 
     this.readingsService.createReading(reading).subscribe(reading => {
       console.log('reading', reading)
-      this.router.navigate([`/app/readings/${this.auth.user.uid}`],{ queryParams: { readingId: reading.id } })  
+      this.router.navigate([`/app/readings/${this.auth.reader.uid}`],{ queryParams: { readingId: reading.id } })  
     })
     
   }

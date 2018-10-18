@@ -6,12 +6,14 @@
 
 body {
   font-family: Fredoka One, Verdana, sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+  margin: 0px;
 }
 
 .container {
   max-width: 90%;
   overflow: hidden;
-  margin: 5rem auto 0 auto;
+  margin: 6.5rem auto 0 auto;
 }
 
 .clickable:hover {
@@ -21,20 +23,20 @@ body {
 .info-pair {
     display: flex;
     flex-direction: column;
-    margin: 0.5rem 0;
+    margin-bottom: 0.7rem;
 }
 
 .info-pair--property {
     font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: rgb(212, 157, 157);
+  background-color: tomato;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  font-size: 0.7rem;
+  border-radius: 3px;
+  padding: 2px;
 
   /* Position the tooltip */
   position: absolute;
@@ -48,4 +50,16 @@ body {
 a {
   text-decoration: none;
   color: black;
+}
+
+.heading {
+  font-weight: 700;
+}
+
+.heading-bottom-margin {
+  margin-bottom: 2rem;
+}
+
+.shadow {
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 }

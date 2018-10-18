@@ -2,7 +2,7 @@
 
   <div class="header--content">
     <div>
-      <i class="fas fa-book-reader"></i>
+      <i class="logo fas fa-book-reader"></i>
       <span class="logo-text"> Leadreader</span>
     </div>
 
@@ -28,9 +28,13 @@
     <i class="fas fa-book"></i>
     <span> &nbsp;&nbsp;Find Book</span>
   </a>
-  <a mat-menu-item [routerLink]="['community']">
+  <a mat-menu-item [routerLink]="['/app/community']">
     <i class="fas fa-users"></i>
     <span> Community</span>
+  </a>
+  <a mat-menu-item (click)="authService.signOut()">
+    <i class="fas fa-sign-out-alt"></i>
+    <span> Sign Out</span>
   </a>
 
 </mat-menu>

@@ -1,22 +1,22 @@
 <div *ngIf="!!readings" class="readings-section">
 
-  <div class="header-readings">
-    <h3>Readings</h3>
-    <a [routerLink]="['app/search-book']" class="new-reading">
+  <div class="header-readings heading-bottom-margin">
+    <div class="heading">Readings</div>
+    <a *ngIf="isOwner" [routerLink]="['app/search-book']" class="new-reading">
       NEW
       <i class="fas fa-plus-circle"></i>
     </a>
   </div>
 
-  <div class="reading" [ngClass]="{'reading__active': current?.id === reading.id}" *ngFor="let reading of readings"
+  <div class="reading shadow" [ngClass]="{'reading__active': current?.id === reading.id}" *ngFor="let reading of readings"
     (click)="!isDeleting ? selectReading.emit(reading) : null">
 
     <div class="book-info">
       <span class="title">{{reading.book.title}}</span>
       <span class="author">{{reading.book.author}}</span>
-      <div class="tooltip">
+      <div *ngIf="isOwner" class="tooltip">
         <i (click)="isDeleting = true; delete(reading)" class="delete clickable far fa-trash-alt"></i>
-        <span class="tooltiptext">delete</span>
+        <span class="tooltiptext">Delete Reading</span>
       </div>
     </div>
 

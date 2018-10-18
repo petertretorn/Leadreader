@@ -1,4 +1,4 @@
-import { User } from "./../models/user";
+import { Reader } from './../models/reader';
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -17,46 +17,38 @@ import { AngularFireAuth } from "@angular/fire/auth";
   providedIn: "root"
 })
 export class AuthService {
-  user$: Observable<User | null>;
-  user: User | null;
+  reader$: Observable<Reader | null>;
+  reader: Reader | null;
 
-  userId: string = null;
+  readerId: string = null;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    this.user$ = this.afAuth.authState.pipe(
+    this.reader$ = this.afAuth.authState.pipe(
       tap( user => console.log('auth', user )),
       switchMap(user => {
         if (user) {
           console.log('setting userid', user.uid)
-          this.userId = user.uid
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          this.readerId = user.uid
+          return this.afs.doc<Reader>(`readers/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
       }),
-      tap(user => localStorage.setItem('user', JSON.stringify(user)))
+      tap(user => localStorage.setItem('reader', JSON.stringify(user)))
       
       // startWith(JSON.parse(localStorage.getItem('user')))
     );
 
-    this.user$.pipe(
+    this.reader$.pipe(
       filter(user => !!user)
     ).subscribe(user => {
-      this.user = user
-      this.userId = user.uid
+      this.reader = user
+      this.readerId = user.uid
     })
-  }
-
-  updateUser(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
-    );
-
-    return userRef.set(user).then(res => console.log('usesr updated'))
   }
 
   googleLogin() {
@@ -79,15 +71,6 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-  private oAuthLogin(provider: any) {
-    return this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(credential => {
-        return this.updateUserData(credential.user);
-      })
-      .catch(error => this.handleError(error));
-  }
-
   anonymousLogin() {
     return this.afAuth.auth
       .signInAnonymously()
@@ -99,6 +82,28 @@ export class AuthService {
       });
   }
 
+  private oAuthLogin(provider: any) {
+    
+    console.log('signInWithPopup I')
+  
+    return this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(credential => {
+        console.log('signInWithPopup II')
+        return this.updateUserData(credential.user);
+      })
+      .catch(error => this.handleError(error));
+  }
+
+  updateUser(user: Reader) {
+    const userRef: AngularFirestoreDocument<Reader> = this.afs.doc(
+      `users/${user.uid}`
+    );
+
+    return userRef.update(user).then(res => console.log('user updated'))
+  }
+
+  
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
@@ -131,23 +136,30 @@ export class AuthService {
     });
   }
 
-  // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
   }
 
-  private updateUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
+  private updateUserData(user: Reader) {
+    const userRef: AngularFirestoreDocument<Reader> = this.afs.doc(
+      `readers/${user.uid}`
     );
 
-    const data: User = {
+    const data: Reader = {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName || "nameless user",
       photoURL: user.photoURL || "https://goo.gl/Fz9nrQ",
-
     };
-    return userRef.set(data);
+    return userRef.valueChanges().subscribe(user => {
+      if (!!user) {
+        console.log('existing user')
+        userRef.update({ ...data} );
+      } else {
+        console.log('new user')
+        userRef.set(data);
+      }
+    })
+
   }
 }

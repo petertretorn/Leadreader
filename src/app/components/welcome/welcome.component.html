@@ -1,16 +1,17 @@
 <header class="showcase">
   <div class="content">
-    <div class="title">
-      LeadReader
+    <div>
+      <div class="title">
+        Leadreader
+      </div>
+      <div class="text">
+        A Community Of Dedicated Readers sharing Insights
+      </div>  
     </div>
-    <div class="text">
-      A Community Of Dedicated Readers sharing Insights
+    <div class="join">
+      <p>Log In or Sign Up For An Account Now</p>
+      <button (click)="joinWithGoogle()" mat-button mat-raised-button color="primary">
+        <i class="fab fa-google"></i> Google</button>
     </div>
   </div>
 </header>
-
-<div class="join">
-    <p>Log In or Sign Up Now</p>
-    <button (click)="joinWithGoogle()" mat-button mat-raised-button color="primary">
-      <i class="fab fa-google"></i> Google</button>
-</div>

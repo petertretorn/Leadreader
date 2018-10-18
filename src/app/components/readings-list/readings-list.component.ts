@@ -12,6 +12,7 @@ export class ReadingsListComponent implements OnInit, OnChanges {
 
   @Input() readings: Reading[]
   @Input() currentReading: Reading
+  @Input() isOwner: boolean
 
   @Output() deleteReading = new EventEmitter();
   @Output() selectReading = new EventEmitter();

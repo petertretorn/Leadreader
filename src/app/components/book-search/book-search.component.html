@@ -1,6 +1,6 @@
-<div class="container">
+<div *ngIf="bookData">
   <div class="center">
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input type="search" [(ngModel)]='searchTerm' matInput placeholder="Search book" (keyup.enter)="search()">
       <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm=''">
         <mat-icon>close</mat-icon>

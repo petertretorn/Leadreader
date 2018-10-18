@@ -6,7 +6,7 @@ import { NgZone } from "@angular/core";
 @Component({
   selector: "lr-welcome",
   templateUrl: "./welcome.component.html",
-  styleUrls: ["./welcome.component.css"]
+  styleUrls: ["./welcome.component.scss"]
 })
 export class WelcomeComponent implements OnInit {
   image: string = "../../assets/books.jpg";

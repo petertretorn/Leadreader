@@ -1,4 +1,4 @@
-import { User } from './../../models/user';
+import { Reader } from './../../models/reader';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
 
@@ -11,7 +11,7 @@ export class UserDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public user: User) {
+    @Inject(MAT_DIALOG_DATA) public user: Reader) {
       this.user = user
     }
 

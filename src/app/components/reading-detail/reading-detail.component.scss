@@ -1,21 +1,27 @@
+.wrapper {
+  width: 100%;
+}
+
 .quote {
-  font-style: oblique;
+  font-style: oblique;   
+  border-left: 0.2px solid;
+  padding-left: 1.2rem;
+  
+  margin-top: 1rem;
+
 }
 
 .note,
 .quote {
   white-space: pre-wrap;
+  margin-left: 1rem;
 }
 
 .noteQuote {
-  background: rgb(241, 236, 236);
+  // background: rgb(241, 236, 236);
   padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.note-section {
-  border-radius: 3px;
+  margin-bottom: 1.5rem;
+  border-left: 1.5px sandybrown solid;
 }
 
 .posted-date {
@@ -28,16 +34,25 @@
   justify-content: space-between;
 }
 
-.book {
+.reading-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+
+  img {
+    width: auto;
+    height: 14rem;
+    margin-right: 1.2rem; 
+
+  }
 }
 
-.book img {
-  width: 8rem;
-  height: auto;
+.reading-header--book {
+  display: flex;
+  padding: 1rem;
+  border-left: 1.5px sandybrown solid;
 }
+
 
 textarea[name="quote"] {
   font-style: oblique;
@@ -55,6 +70,5 @@ textarea {
 /* Small Screens */
 @media (max-width: 560px) {
   .book--image__is-mobile {
-    display: none !important;
   }
 }

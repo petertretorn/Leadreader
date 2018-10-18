@@ -1,20 +1,20 @@
 .profile-section {
-  margin-top: 1.2rem;
 }
 
 .profile-image {
   width: 12rem;
   height: auto;
   border-radius: 5px;
-  border: 1.5px solid rgb(100, 83, 83);
+  // border: 1.5px solid rgb(100, 83, 83);
 }
 
 .profile-details {
   display: flex;
   flex-direction: column;
-  height: 6.5rem;
+  height: 8rem;
   justify-content: space-between;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .profile-details .master-data {

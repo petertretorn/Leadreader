@@ -1,0 +1,19 @@
+.reader {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.reader__image {
+  width: auto;
+  height: 14rem;
+  margin-right: 1.2rem;
+}
+
+.reader__master-data {
+  margin-left: 1rem;
+}

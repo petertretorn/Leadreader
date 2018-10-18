@@ -1,4 +1,4 @@
-export class User {
+export class Reader {
   uid: string;
   email?: string | null;
   photoURL?: string;

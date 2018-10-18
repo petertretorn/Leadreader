@@ -9,14 +9,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AppShellComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   gotoHome() {
-    console.log(this.authService.userId, ' going home')
-    this.router.navigate([`/app/readings/${this.authService.userId}`])
+    console.log(this.authService.readerId, ' going home')
+    this.router.navigate([`/app/readings/${this.authService.readerId}`])
   }
 
 }

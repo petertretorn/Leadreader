@@ -1,24 +1,30 @@
 .header-readings {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 320px;
 }
 
 .new-reading {
   padding: 0.4rem;
   background: tomato;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .reading {
-  width: 320px;
+  max-width: 320px;
   height: 6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.2s;
+  transition: background 0.2s;
   padding-left: 1rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background-color: beige;
+    
+    cursor: pointer;
+  }
 
   &:hover .book-info .delete {
     display: block;
@@ -46,25 +52,23 @@
   }
 }
 
-.reading:hover {
-  background-color: beige;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .reading__active {
   background-color: beige;
-  border-radius: 5px;
-  cursor: pointer;
+  border-left: 1.5px solid sandybrown;
 }
 
 /* Small Screens */
 @media (max-width: 560px) {
+  
+  .header-readings {
+    width: 100%;
+  }
+  
   .reading {
     width: 100%;
 
     .title {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     .author {

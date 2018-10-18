@@ -1,17 +1,17 @@
-<div class="grid">
+<div class="wrapper">
+  <div class="grid">
 
-  <lr-user *ngIf="auth.user$ | async as user" [user]="user" (edit)="editProfile($event)"></lr-user>
+    <!-- <lr-user *ngIf="auth.user$ | async as user" [user]="user" (edit)="editProfile($event)"></lr-user> -->
 
-  <lr-readings-list *ngIf="!!readings" 
-  [readings]="readings" 
-  [currentReading]="currentReading" 
-  (deleteReading)="deleteReading($event)"
-  (selectReading)="selectReading($event)">
-  </lr-readings-list>
+    <lr-readings-list *ngIf="!!readings" [isOwner]="isOwner" [readings]="readings" [currentReading]="currentReading" (deleteReading)="deleteReading($event)"
+      (selectReading)="selectReading($event)">
+    </lr-readings-list>
 
-  <div *ngIf="!!currentReading" class="current-reading">
-    <lr-reading-detail *ngIf="!!currentReading" [reading]="currentReading" (deleteNote)="deleteNote($event)" (updateReading)="updateReading($event)">
-    </lr-reading-detail>
+    <div *ngIf="!!currentReading" class="current-reading">
+      <lr-reading-detail *ngIf="!!currentReading" [isOwner]="isOwner" [reading]="currentReading" (deleteNote)="deleteNote($event)" (updateReading)="updateReading($event)">
+      </lr-reading-detail>
+    </div>
+
   </div>
 
 </div>

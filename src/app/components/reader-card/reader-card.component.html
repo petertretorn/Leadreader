@@ -1,0 +1,24 @@
+<div class="reader shadow" (click)="gotoReader(reader.uid)">
+
+  <img class="reader__image shadow" [src]="reader.photoURL" alt="">
+
+  <div class="reader__master-data">
+
+    <div class="info-pair">
+      <span class="info-pair--property">Country</span>
+      <span>{{reader.country}}</span>
+    </div>
+   
+    <div class="info-pair">
+      <span class="info-pair--property">Favorite Book</span>
+      <span>{{reader.favoriteBook}}</span>
+    </div>
+ 
+    <div class="info-pair">
+      <span class="info-pair--property">Favorite Quote</span>
+      <span>Jodling is great</span>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,11 @@
+.readers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+}
+
+@media (max-width: 560px) {
+  .readers {
+    grid-template-columns: 1fr;
+  }
+}

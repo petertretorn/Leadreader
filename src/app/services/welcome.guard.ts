@@ -1,4 +1,4 @@
-import { User } from './../models/user';
+import { Reader } from "./../models/reader";
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
@@ -17,12 +17,11 @@ export class WelcomeGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.user$.pipe(
+    return this.auth.reader$.pipe(
       take(1),
       map(user => !user),
       tap(notloggedIn => {
         if (!notloggedIn) {
-          console.log('already authenticated')
           this.router.navigate(['/app/search-book']);
         }
       })

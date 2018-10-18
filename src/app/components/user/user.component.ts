@@ -1,4 +1,4 @@
-import { User } from './../../models/user';
+import { Reader } from './../../models/reader';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  @Input() user: User
+  @Input() user: Reader
 
   @Output() public edit = new EventEmitter()
 

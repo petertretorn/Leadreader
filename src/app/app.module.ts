@@ -25,6 +25,8 @@ import { DefaultValuePipe } from './default-value.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ReadingsListComponent } from './components/readings-list/readings-list.component';
 import { MobileUserComponent } from './components/mobile-user/mobile-user.component';
+import { CommunityComponent } from './components/community/community.component';
+import { ReaderCardComponent } from './components/reader-card/reader-card.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { MobileUserComponent } from './components/mobile-user/mobile-user.compon
     DefaultValuePipe,
     UserComponent,
     ReadingsListComponent,
-    MobileUserComponent
+    MobileUserComponent,
+    CommunityComponent,
+    ReaderCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { User } from "./../../models/user";
+import { Reader } from './../../models/reader';
 import { UserDialogComponent } from "./../user-dialog/user-dialog.component";
 import { MatDialog } from "@angular/material";
 import { AuthService } from "./../../services/auth.service";
@@ -14,9 +14,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./readings.component.scss"]
 })
 export class ReadingsComponent implements OnInit {
-  readings: Reading[];
-  currentReading: Reading = null;
-  isDeleting: boolean = false;
+  readings: Reading[]
+  currentReading: Reading = null
+  isDeleting: boolean = false
+  isOwner: boolean = false
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,8 @@ export class ReadingsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const userId = params.get("userId");
+
+      this.isOwner = (userId === this.auth.readerId)
 
       this.readingsService.getReadigsForUser(userId).subscribe(readings => {
         this.readings = readings;
@@ -49,10 +52,10 @@ export class ReadingsComponent implements OnInit {
   editProfile() {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: "500px",
-      data: this.auth.user
+      data: this.auth.reader
     });
 
-    dialogRef.afterClosed().subscribe((user: User) => {
+    dialogRef.afterClosed().subscribe((user: Reader) => {
       if (!!user) {
         this.auth.updateUser(user).then(res => console.log("usesr updated"));
       }
