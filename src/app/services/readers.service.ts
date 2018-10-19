@@ -1,16 +1,25 @@
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Reader } from './../models/reader';
 import { Injectable } from '@angular/core';
+ 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReadersService {
 
-  constructor(private readonly afs: AngularFirestore) { }
+  collection: AngularFirestoreCollection<Reader>
+
+  constructor(private readonly afs: AngularFirestore) { 
+    this.collection = this.afs.collection<Reader>('readers')
+  }
 
   getReaders(): Observable<Reader[]> {
-    return this.afs.collection<Reader>('readers').valueChanges()
+    return this.collection.valueChanges()
+  }
+
+  getReader(id: string): Observable<Reader> {
+    return this.collection.doc(id).valueChanges() as Observable<Reader>
   }
 }

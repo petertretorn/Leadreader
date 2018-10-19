@@ -39,7 +39,7 @@ export class ReadingsService {
     return of<Reading>( obj )
   }
 
-  getReadigsForUser(userId: string): Observable<Reading[]> {
+  getReadingsForUser(userId: string): Observable<Reading[]> {
     return this.afs.collection<Reading>('readings', ref => ref.where('userId', '==', userId)).valueChanges()
   }
 
@@ -55,8 +55,8 @@ export class ReadingsService {
     this.updateReading(clone)
   }
 
-  updateReading(reading: Reading) {
-    this.afs.doc<Reading>(`readings/${reading.id}`).update( this.makePureJSObject(reading) )
+  updateReading(reading: Reading): Promise<void> {
+    return this.afs.doc<Reading>(`readings/${reading.id}`).update( this.makePureJSObject(reading) )
   }
 
   getReading(id: string): Observable<Reading> {

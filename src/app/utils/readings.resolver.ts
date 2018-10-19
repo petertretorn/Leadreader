@@ -16,7 +16,7 @@ export class ReadingsResolver implements Resolve<Reading[]> {
     const userId = route.params.userId;
     console.log('ReadingsResolver')
 
-    return this.readingsService.getReadigsForUser(userId)
+    return this.readingsService.getReadingsForUser(userId)
         
     
     

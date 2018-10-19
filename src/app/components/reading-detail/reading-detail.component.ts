@@ -4,13 +4,14 @@ import { Reading } from "./../../models/reading";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ReadingsService } from "../../services/readings.service";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatCheckbox } from '@angular/material';
 import { Input } from "@angular/core";
 import { Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { NgZone } from "@angular/core";
 import { AfterViewInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 
 declare var tinymce: any;
@@ -28,10 +29,12 @@ export class ReadingDetailComponent implements OnInit  {
   @Output() public updateReading = new EventEmitter<Reading>();
   @Output() onEditorKeyup = new EventEmitter<any>();
 
-  isEditingNote: boolean = false;
+  isEditingNote: boolean = false
   isInEditMode = {}
   newQuote: QuoteNote = null
   content: string
+
+  @ViewChild(MatCheckbox) isPrivateCheckBox: MatCheckbox;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +46,12 @@ export class ReadingDetailComponent implements OnInit  {
 
   ngOnInit() {
     
+  }
+
+  togglePrivate() {
+    this.reading.isPrivate = !this.reading.isPrivate
+    this.isPrivateCheckBox.toggle()
+    this.updateReading.emit(this.reading)
   }
 
   editNote(noteId: string) {

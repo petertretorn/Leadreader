@@ -4,6 +4,7 @@ export class Reader {
   photoURL?: string;
   displayName?: string;
   fullName?: string;
-  favoriteBook?: string;
   country?: string;
+  favoriteBook?: string;
+  favoriteqoute?: string;
 }

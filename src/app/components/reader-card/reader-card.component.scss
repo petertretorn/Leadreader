@@ -1,7 +1,6 @@
 .reader {
   padding: 1rem;
   display: flex;
-  justify-content: space-between;
 
   &:hover {
     cursor: pointer;
@@ -10,7 +9,7 @@
 
 .reader__image {
   width: auto;
-  height: 14rem;
+  height: 5rem;
   margin-right: 1.2rem;
 }
 

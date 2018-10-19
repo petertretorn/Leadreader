@@ -51,6 +51,10 @@ export class AuthService {
     })
   }
 
+  isOwner(id: string) {
+    return id === this.readerId
+  }
+
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
@@ -95,12 +99,12 @@ export class AuthService {
       .catch(error => this.handleError(error));
   }
 
-  updateUser(user: Reader) {
+  updateUser(reader: Reader) {
     const userRef: AngularFirestoreDocument<Reader> = this.afs.doc(
-      `users/${user.uid}`
+      `readers/${reader.uid}`
     );
 
-    return userRef.update(user).then(res => console.log('user updated'))
+    return userRef.update(reader).then(res => console.log('reader updated'))
   }
 
   

@@ -23,11 +23,12 @@ export class ReadingsListComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.current = this.currentReading
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.current = changes.currentReading.currentValue
+    this.currentReading = (changes.currentReading) ? changes.currentReading.currentValue : this.currentReading 
+    this.isOwner = (changes.isOwner) ? changes.isOwner.currentValue : this.isOwner
+    this.readings = (changes.readings) ? changes.readings.currentValue : this.readings
   }
 
   select(reading: Reading) {
@@ -36,7 +37,7 @@ export class ReadingsListComponent implements OnInit, OnChanges {
 
   delete(reading: Reading) {
     this.deleteReading.emit(reading)
-    this.isDeleting =false
+    this.isDeleting = false
   }
 
 }

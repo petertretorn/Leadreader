@@ -1,3 +1,5 @@
+import { take } from 'rxjs/operators';
+import { ReadersService } from './../../services/readers.service';
 import { Reader } from './../../models/reader';
 import { UserDialogComponent } from "./../user-dialog/user-dialog.component";
 import { MatDialog } from "@angular/material";
@@ -15,6 +17,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ReadingsComponent implements OnInit {
   readings: Reading[]
+  reader: Reader
+  userId: string
   currentReading: Reading = null
   isDeleting: boolean = false
   isOwner: boolean = false
@@ -22,42 +26,52 @@ export class ReadingsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private readingsService: ReadingsService,
+    private readersService: ReadersService,
     private router: Router,
     public auth: AuthService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
+
     this.route.paramMap.subscribe(params => {
-      const userId = params.get("userId");
+      
+      this.userId = params.get("userId");
 
-      this.isOwner = (userId === this.auth.readerId)
+      this.readersService.getReader(this.userId).subscribe(reader => {
+        this.reader = reader
+      })
 
-      this.readingsService.getReadigsForUser(userId).subscribe(readings => {
+      this.auth.reader$.subscribe(reader => {
+        this.isOwner = (this.userId === reader.uid)
+      })
+
+      this.readingsService.getReadingsForUser(this.userId).pipe(
+        take(1)
+      ).subscribe(readings => {
         this.readings = readings;
-
+        console.log('getReadigsForUser')
+        
         this.route.queryParams.subscribe(params => {
           const readingId = params["readingId"];
-
-          if (!!readingId) {
-            this.currentReading = this.readings.filter(
-              r => r.id === readingId
-            )[0];
-          }
+          this.currentReading =  (!!readingId) ? this.readings.filter(r => r.id === readingId)[0] : null
         });
       });
+
     });
+
+    
   }
 
-  editProfile() {
+  editProfile(reader: Reader) {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: "500px",
       data: this.auth.reader
     });
 
-    dialogRef.afterClosed().subscribe((user: Reader) => {
-      if (!!user) {
-        this.auth.updateUser(user).then(res => console.log("usesr updated"));
+    dialogRef.afterClosed().subscribe((reader: Reader) => {
+      if (!!reader) {
+        this.auth.updateUser(reader).then(res => console.log("usesr updated"));
       }
     });
   }
@@ -82,6 +96,8 @@ export class ReadingsComponent implements OnInit {
   }
 
   updateReading(reading: Reading) {
-    this.readingsService.updateReading(reading);
+    this.readingsService.updateReading(reading).then( _ => {
+      this.selectReading(reading)
+    })
   }
 }

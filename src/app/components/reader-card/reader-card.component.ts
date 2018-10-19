@@ -9,8 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ReaderCardComponent implements OnInit {
 
-  @Input() 
-  public reader: Reader
+  @Input() public reader: Reader
   
   constructor(private router: Router) { }
 

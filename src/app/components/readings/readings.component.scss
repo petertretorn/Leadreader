@@ -5,10 +5,17 @@
 
 .grid {
   display: grid;
-  // grid-template-columns: 1fr 1fr 3fr;
   grid-template-columns: 1fr 3fr;
   grid-gap: 5rem;
-  // width: 70%;
+}
+
+.reader-section {
+  display: flex;
+  flex-direction: column;
+
+  .reader-section__reader {
+    margin-bottom: 1.5rem;  
+  }
 }
 
 .current-reading {
@@ -28,15 +35,17 @@
     grid-gap: 2rem;
   }
 
-  lr-user {
-    display: none;
-  }
-
   .current-reading {
     border-top: 0.5px #999 solid;
     padding-top: 2rem;
 
     height: initial;
     overflow-y: initial;
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 100%;
   }
 }
