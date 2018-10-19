@@ -10,6 +10,7 @@ export class Reading {
     id: string
     userId: string
     book: Book
+    dateCreated: Date;
     quoteNotes: QuoteNote[]
     isPrivate: boolean
     owner: Reader

@@ -35,10 +35,9 @@ export class BookSearchComponent implements OnInit {
     this.bookData = null;
 
     this.apiService.searchBooks(this.searchTerm).subscribe((bookData: any) => {
-      console.log(bookData)
+      // console.log(bookData)
       
       Object.values(bookData).forEach( (bd: any) => {
-        console.log(bd.volumeInfo.title);
         if (!bd.volumeInfo.imageLinks) {
           bd.volumeInfo.imageLinks = {
             thumbnail: "assets/images/no_cover.jpg"
@@ -60,11 +59,15 @@ export class BookSearchComponent implements OnInit {
 
     let book = new Book(title, author, categories, imageUrl, published, publisher)
     let reading = new Reading(book)
+    reading.dateCreated = new Date()
 
-    this.readingsService.createReading(reading).subscribe(reading => {
-      console.log('reading', reading)
+    this.readingsService.createReading(reading).then(_ => {
       this.router.navigate([`/app/readings/${this.auth.reader.uid}`],{ queryParams: { readingId: reading.id } })  
     })
+
+    // this.readingsService.createReading(reading).subscribe(reading => {
+    //   this.router.navigate([`/app/readings/${this.auth.reader.uid}`],{ queryParams: { readingId: reading.id } })  
+    // })
     
   }
 }

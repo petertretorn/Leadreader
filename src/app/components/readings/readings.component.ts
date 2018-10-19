@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { ReadersService } from './../../services/readers.service';
 import { Reader } from './../../models/reader';
@@ -9,19 +10,23 @@ import { Reading } from "./../../models/reading";
 import { Observable } from "rxjs/internal/Observable";
 import { ReadingsService } from "./../../services/readings.service";
 import { Component, OnInit } from "@angular/core";
+import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: "lr-readings",
   templateUrl: "./readings.component.html",
   styleUrls: ["./readings.component.scss"]
 })
-export class ReadingsComponent implements OnInit {
+export class ReadingsComponent implements OnInit, OnDestroy {
+  
   readings: Reading[]
   reader: Reader
   userId: string
   currentReading: Reading = null
   isDeleting: boolean = false
   isOwner: boolean = false
+  subscriptions: Subscription[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -46,21 +51,30 @@ export class ReadingsComponent implements OnInit {
         this.isOwner = (this.userId === reader.uid)
       })
 
-      this.readingsService.getReadingsForUser(this.userId).pipe(
+      const subscription = this.readingsService.getReadingsForUser(this.userId).pipe(
+        tap(readings => console.log('readingsService.getReadingsForUser', readings.length) ),
         take(1)
       ).subscribe(readings => {
-        this.readings = readings;
-        console.log('getReadigsForUser')
-        
-        this.route.queryParams.subscribe(params => {
-          const readingId = params["readingId"];
-          this.currentReading =  (!!readingId) ? this.readings.filter(r => r.id === readingId)[0] : null
-        });
+        this.readings = readings.sort( (r1, r2) => {
+          return (r1.dateCreated < r2.dateCreated) ? 1 : 0 
+         } )
+
+         this.currentReading = this.readings[0]
+
+        // this.route.queryParams.subscribe(params => {
+        //   const readingId = params["readingId"];
+        //   this.currentReading =  (!!readingId) ? this.readings.filter(r => r.id === readingId)[0] : null
+        // });
       });
 
-    });
+      // this.subscriptions.push(subscription)
 
+    });
     
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
   }
 
   editProfile(reader: Reader) {

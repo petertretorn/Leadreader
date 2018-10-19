@@ -16,17 +16,13 @@
 </div>
 
 <mat-menu #menu="matMenu">
-  <a mat-menu-item class="menu--item" [routerLink]="['profile']">
+  <!-- <a mat-menu-item class="menu--item" [routerLink]="['profile']">
     <i class="fas fa-user"></i>
     <span> &nbsp;Profile</span>
-  </a>
+  </a> -->
   <a mat-menu-item (click)="gotoHome()">
     <i class="fas fa-home"></i>
     <span> &nbsp;Home</span>
-  </a>
-  <a mat-menu-item [routerLink]="['search-book']">
-    <i class="fas fa-book"></i>
-    <span> &nbsp;&nbsp;Find Book</span>
   </a>
   <a mat-menu-item [routerLink]="['/app/community']">
     <i class="fas fa-users"></i>

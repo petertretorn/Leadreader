@@ -13,9 +13,6 @@ import { AfterViewInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { ViewChild } from '@angular/core';
 
-
-declare var tinymce: any;
-
 @Component({
   selector: "lr-reading-detail",
   templateUrl: "./reading-detail.component.html",

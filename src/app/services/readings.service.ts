@@ -25,7 +25,7 @@ export class ReadingsService {
     this.readings$ = this.readingsCollection.valueChanges()
   }
 
-  createReading(reading: Reading): Observable<Reading> {
+  createReading(reading: Reading): Promise<void> {
     reading.userId = this.authService.readerId;
 
     const id = this.afs.createId()
@@ -33,10 +33,12 @@ export class ReadingsService {
     let obj = this.makePureJSObject(reading)
     obj = { ...obj, id}
 
-    this.readingsCollection.doc(id).set( { ...obj, id} ).then( 
-      () => console.log('saved to firestore'))
+    return this.readingsCollection.doc(id).set( { ...obj, id} )
 
-    return of<Reading>( obj )
+    // this.readingsCollection.doc(id).set( { ...obj, id} ).then( 
+    //   () => console.log('saved to firestore'))
+
+    // return of<Reading>( obj )
   }
 
   getReadingsForUser(userId: string): Observable<Reading[]> {
@@ -45,9 +47,6 @@ export class ReadingsService {
 
   addNoteToReading(reading: Reading, note: QuoteNote) {
     note.id = this.afs.createId()
-    
-    // reading.quoteNotes = reading.quoteNotes || []
-    // reading.quoteNotes.push(note)
 
     let clone = { ...reading }
     clone.quoteNotes.push(note)
