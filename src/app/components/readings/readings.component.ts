@@ -102,7 +102,11 @@ export class ReadingsComponent implements OnInit, OnDestroy {
 
     this.readingsService
       .deleteReading(reading)
-      .then(() => (this.isDeleting = false));
+      .then(() => {
+        this.isDeleting = false
+        this.readings = this.readings.filter(r => r.id !== reading.id)
+        this.currentReading = this.readings[0]
+      });
   }
 
   selectReading(reading: Reading) {
