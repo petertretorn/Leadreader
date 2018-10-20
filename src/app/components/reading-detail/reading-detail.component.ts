@@ -53,7 +53,6 @@ export class ReadingDetailComponent implements OnInit  {
 
   editNote(noteId: string) {
     this.isInEditMode[noteId] = true
-    this.autogrowTextareas()
   }
 
   saveNote(noteId: string) {
@@ -61,18 +60,6 @@ export class ReadingDetailComponent implements OnInit  {
     this.updateReading.emit(this.reading)
   }
 
-  autogrowTextareas() {
-    setTimeout(() => {
-      let textAreas: HTMLTextAreaElement[] = Array.from(document.querySelectorAll('textarea.visible'));
-
-      textAreas.forEach(textArea => {
-        textArea.style.overflow = "hidden"
-        textArea.style.height = "0px"
-        textArea.style.height = (textArea.scrollHeight - 15) + "px"
-      })
-    }, 1)
-  }
- 
   addNewNote() {
     this.newQuote = new QuoteNote()
   }

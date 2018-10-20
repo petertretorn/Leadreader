@@ -27,6 +27,7 @@ import { ReadingsListComponent } from './components/readings-list/readings-list.
 import { MobileUserComponent } from './components/mobile-user/mobile-user.component';
 import { CommunityComponent } from './components/community/community.component';
 import { ReaderCardComponent } from './components/reader-card/reader-card.component';
+import { DynamicTextareaDirective } from './utils/dynamic-textarea.directive';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ReaderCardComponent } from './components/reader-card/reader-card.compon
     ReadingsListComponent,
     MobileUserComponent,
     CommunityComponent,
-    ReaderCardComponent
+    ReaderCardComponent,
+    DynamicTextareaDirective
   ],
   imports: [
     BrowserModule,

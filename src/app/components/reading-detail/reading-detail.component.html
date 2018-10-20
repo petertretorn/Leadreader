@@ -49,11 +49,11 @@
     <div *ngIf="!isInEditMode[qn.id]" class="note" [innerHTML]="qn.note">
     </div>
 
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote"
+    <textarea lrDynamicTextarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote"
       name="quote" wrap="hard" placeholder="quote">
     </textarea>
 
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note"
+    <textarea lrDynamicTextarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note"
       name="note" wrap="hard" placeholder="notes"></textarea>
 
     <div class="quote-info">
@@ -82,11 +82,11 @@
   </div>
 
   <div class="new-note" *ngIf="!!newQuote && isOwner">
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard"
+    <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard"
       placeholder="quote">
     </textarea>
 
-    <textarea (keyup)="autogrowTextareas()" [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard"
+    <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard"
       placeholder="notes"></textarea>
 
     <div>
