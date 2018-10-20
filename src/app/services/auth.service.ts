@@ -28,10 +28,8 @@ export class AuthService {
     private router: Router
   ) {
     this.reader$ = this.afAuth.authState.pipe(
-      tap( user => console.log('auth', user )),
       switchMap(user => {
         if (user) {
-          console.log('setting userid', user.uid)
           this.readerId = user.uid
           return this.afs.doc<Reader>(`readers/${user.uid}`).valueChanges();
         } else {
@@ -88,12 +86,9 @@ export class AuthService {
 
   private oAuthLogin(provider: any) {
     
-    console.log('signInWithPopup I')
-  
     return this.afAuth.auth
       .signInWithPopup(provider)
       .then(credential => {
-        console.log('signInWithPopup II')
         return this.updateUserData(credential.user);
       })
       .catch(error => this.handleError(error));

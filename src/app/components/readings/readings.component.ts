@@ -9,9 +9,10 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Reading } from "./../../models/reading";
 import { Observable } from "rxjs/internal/Observable";
 import { ReadingsService } from "./../../services/readings.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ReadingDetailComponent } from '../reading-detail/reading-detail.component';
 
 @Component({
   selector: "lr-readings",
@@ -20,6 +21,8 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class ReadingsComponent implements OnInit, OnDestroy {
   
+  @ViewChild(ReadingDetailComponent) readingDetailComponent: ReadingDetailComponent
+
   readings: Reading[]
   reader: Reader
   userId: string
@@ -52,7 +55,6 @@ export class ReadingsComponent implements OnInit, OnDestroy {
       })
 
       const subscription = this.readingsService.getReadingsForUser(this.userId).pipe(
-        tap(readings => console.log('readingsService.getReadingsForUser', readings.length) ),
         take(1)
       ).subscribe(readings => {
         this.readings = readings.sort( (r1, r2) => {
@@ -60,14 +62,9 @@ export class ReadingsComponent implements OnInit, OnDestroy {
          } )
 
          this.currentReading = this.readings[0]
-
-        // this.route.queryParams.subscribe(params => {
-        //   const readingId = params["readingId"];
-        //   this.currentReading =  (!!readingId) ? this.readings.filter(r => r.id === readingId)[0] : null
-        // });
       });
 
-      // this.subscriptions.push(subscription)
+      this.subscriptions.push(subscription)
 
     });
     
@@ -98,24 +95,30 @@ export class ReadingsComponent implements OnInit, OnDestroy {
   }
 
   deleteReading(reading: Reading) {
-    this.currentReading = null;
+    const isDeletingCurrent = (reading.id === this.currentReading.id);
+
+    if (isDeletingCurrent) {
+      this.readingDetailComponent.currentState = 'none'
+      console.log('isDeletingCurrent')
+    }
 
     this.readingsService
       .deleteReading(reading)
       .then(() => {
         this.isDeleting = false
         this.readings = this.readings.filter(r => r.id !== reading.id)
-        this.currentReading = this.readings[0]
+        if (isDeletingCurrent) this.selectReading(this.readings[0], false)
       });
   }
 
-  selectReading(reading: Reading) {
-    this.currentReading = reading
+  selectReading(reading: Reading, setToNone: boolean = true) {
+    console.log('selectReading')
+    if (setToNone) this.readingDetailComponent.currentState = 'none'
+    setTimeout( _ => this.currentReading = reading, 200)
   }
 
   updateReading(reading: Reading) {
     this.readingsService.updateReading(reading).then( _ => {
-      this.selectReading(reading)
     })
   }
 }

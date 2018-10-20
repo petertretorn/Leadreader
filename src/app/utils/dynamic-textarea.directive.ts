@@ -1,4 +1,4 @@
-import { Directive } from "@angular/core";
+import { Directive, Input } from '@angular/core';
 import { ElementRef } from "@angular/core";
 import { Renderer2 } from "@angular/core";
 import { HostListener } from "@angular/core";
@@ -13,8 +13,13 @@ export class DynamicTextareaDirective {
     this.resizeElement()
   }
 
+  @Input('lrDynamicTextarea') isFocus
+
   constructor(public elementRef: ElementRef, public renderer: Renderer2) {
-    setTimeout( _ => this.resizeElement(), 1)
+    setTimeout( _ => { 
+      this.resizeElement()
+      if (this.isFocus) this.elementRef.nativeElement.focus()
+    }, 1)
   }
 
   resizeElement() {

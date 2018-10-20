@@ -2,25 +2,33 @@
   width: 100%;
 }
 
-.quote {
-  font-style: oblique;   
-  border-left: 0.2px solid;
-  padding-left: 1.2rem;
-  
-  margin-top: 1rem;
 
-}
-
-.note,
-.quote {
-  white-space: pre-wrap;
+@mixin left-margin {
   margin-left: 1rem;
 }
 
-.noteQuote {
+
+.posting {
   padding: 10px;
   margin-bottom: 1.5rem;
   border-left: 1.5px sandybrown solid;
+
+  .posting__quote {
+    font-style: oblique;   
+    border-left: 0.2px solid;
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .posting__note,
+  .posting__quote {
+    white-space: pre-wrap;
+    @include left-margin;
+  }
+
+  label {
+    @include left-margin;
+  }
 }
 
 .posted-date {
@@ -61,8 +69,12 @@ textarea {
   padding: 0.5rem;
   font-size: 1.2rem;
   display: block;
-  width: 95%;
-  border-radius: 10px;
+  width: 85%;
+  border-radius: 3px;
+  margin: 1rem;
+  margin-top: 0.4rem;
+
+  
 }
 
 

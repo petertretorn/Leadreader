@@ -1,98 +1,97 @@
 <div class="wrapper">
   <div class="heading heading-bottom-margin">Reading Space</div>
 
-  <div class="reading-header">
+  <div [@fade-in]="currentState">
 
-    <div class="reading-header--book shadow">
+    <div class="reading-header">
 
-      <div>
-        <img class="shadow book--image__is-mobile" [src]="reading.book.imageUrl" alt="">
+      <div class="reading-header--book shadow">
+
+        <div>
+          <img class="shadow book--image__is-mobile" [src]="reading.book.imageUrl" alt="">
+        </div>
+
+        <div>
+          <div class="info-pair">
+            <span class="info-pair--property">Author</span>
+            <span>{{reading.book.author | defaultValue}}</span>
+          </div>
+          <div class="info-pair">
+            <span class="info-pair--property">Title</span>
+            <span>{{ reading.book.title | defaultValue }}</span>
+          </div>
+          <div class="info-pair">
+            <span class="info-pair--property">Category</span>
+            <span>{{ reading.book.categories | defaultValue }}</span>
+          </div>
+          <div class="info-pair">
+            <span class="info-pair--property">Publisher</span>
+            <span>{{ reading.book.publisher | defaultValue }}</span>
+          </div>
+          <div class="info-pair">
+            <span class="info-pair--property">Year Published</span>
+            <span>{{ reading.book.published | date | defaultValue }}</span>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <div class="info-pair">
-          <span class="info-pair--property">Author</span>
-          <span>{{reading.book.author | defaultValue}}</span>
-        </div>
-        <div class="info-pair">
-          <span class="info-pair--property">Title</span>
-          <span>{{ reading.book.title | defaultValue }}</span>
-        </div>
-        <div class="info-pair">
-          <span class="info-pair--property">Category</span>
-          <span>{{ reading.book.categories | defaultValue }}</span>
-        </div>
-        <div class="info-pair">
-          <span class="info-pair--property">Publisher</span>
-          <span>{{ reading.book.publisher | defaultValue }}</span>
-        </div>
-        <div class="info-pair">
-          <span class="info-pair--property">Year Published</span>
-          <span>{{ reading.book.published | date | defaultValue }}</span>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="isOwner" class="reading-header--controls">
-      <mat-checkbox  [checked] = "reading.isPrivate" (change)="togglePrivate()">Private</mat-checkbox>
-    </div>
-
-  </div>
-
-  <div *ngFor="let qn of reading.quoteNotes" class="noteQuote shadow">
-
-    <div *ngIf="!isInEditMode[qn.id]" class="quote" [innerHTML]="qn.quote">
-    </div>
-
-    <br>
-
-    <div *ngIf="!isInEditMode[qn.id]" class="note" [innerHTML]="qn.note">
-    </div>
-
-    <textarea lrDynamicTextarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.quote"
-      name="quote" wrap="hard" placeholder="quote">
-    </textarea>
-
-    <textarea lrDynamicTextarea [ngClass]="{'visible': isInEditMode[qn.id]}" *ngIf="isInEditMode[qn.id]" [(ngModel)]="qn.note"
-      name="note" wrap="hard" placeholder="notes"></textarea>
-
-    <div class="quote-info">
-
-      <div class="posted-date">
-        Posted {{ qn.created | date }}
-      </div>
-
-      <div *ngIf="isOwner">
-        <span *ngIf="isInEditMode[qn.id]">
-          <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
-          <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
-        </span>
-        <span *ngIf="!isInEditMode[qn.id]">
-          <i (click)="editNote(qn.id)" class="clickable fas fa-edit"></i>&nbsp;
-          <i (click)="deleteNote.emit(qn.id)" class="clickable far fa-trash-alt"></i>
-        </span>
+      <div *ngIf="isOwner" class="reading-header--controls">
+        <mat-checkbox [checked]="reading.isPrivate" (change)="togglePrivate()">Private</mat-checkbox>
       </div>
 
     </div>
 
-  </div>
+    <div *ngFor="let qn of reading.quoteNotes" class="posting shadow">
 
-  <div>
-    <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
-  </div>
+      <div *ngIf="!isInEditMode[qn.id]">
+        <div class="posting__quote" [innerHTML]="qn.quote"></div>
+        <br>
+        <div class="posting__note" [innerHTML]="qn.note"></div>
+      </div>
 
-  <div class="new-note" *ngIf="!!newQuote && isOwner">
-    <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard"
-      placeholder="quote">
-    </textarea>
+      <div *ngIf="isInEditMode[qn.id]">
+        <label for="quote">Quote From Book</label>
+        <textarea [lrDynamicTextarea]="true" [(ngModel)]="qn.quote" name="quote" placeholder="quote"></textarea>
+        <label for="note">Your Notes</label>
+        <textarea lrDynamicTextarea [(ngModel)]="qn.note" name="note" placeholder="notes"></textarea>
+      </div>
 
-    <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard"
-      placeholder="notes"></textarea>
+      <div class="quote-info">
+
+        <div class="posted-date">
+          Posted {{ qn.created | date }}
+        </div>
+
+        <div *ngIf="isOwner">
+          <span *ngIf="isInEditMode[qn.id]">
+            <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
+            <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
+          </span>
+          <span *ngIf="!isInEditMode[qn.id]">
+            <i (click)="editNote(qn.id)" class="clickable fas fa-edit"></i>&nbsp;
+            <i (click)="deleteNote.emit(qn.id)" class="clickable far fa-trash-alt"></i>
+          </span>
+        </div>
+
+      </div>
+
+    </div>
 
     <div>
-      <button mat-raised-button (click)="saveNewNote()">Save</button>
+      <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
     </div>
+
+    <div class="new-note" *ngIf="!!newQuote && isOwner">
+      <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard" placeholder="quote">
+      </textarea>
+
+      <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard" placeholder="notes"></textarea>
+
+      <div>
+        <button mat-raised-button (click)="saveNewNote()">Save</button>
+      </div>
+    </div>
+
+
   </div>
-
-
 </div>

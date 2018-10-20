@@ -34,11 +34,6 @@ export class ReadingsService {
     obj = { ...obj, id}
 
     return this.readingsCollection.doc(id).set( { ...obj, id} )
-
-    // this.readingsCollection.doc(id).set( { ...obj, id} ).then( 
-    //   () => console.log('saved to firestore'))
-
-    // return of<Reading>( obj )
   }
 
   getReadingsForUser(userId: string): Observable<Reading[]> {

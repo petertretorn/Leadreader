@@ -29,8 +29,6 @@ export class ReadingsListComponent implements OnInit, OnChanges {
     this.currentReading = (changes.currentReading) ? changes.currentReading.currentValue : this.currentReading 
     this.isOwner = (changes.isOwner) ? changes.isOwner.currentValue : this.isOwner
     this.readings = (changes.readings) ? changes.readings.currentValue : this.readings
-
-    console.log('this.currentReading', this.currentReading)
   }
 
   select(reading: Reading) {
@@ -39,7 +37,8 @@ export class ReadingsListComponent implements OnInit, OnChanges {
 
   delete(reading: Reading) {
     this.deleteReading.emit(reading)
-    this.isDeleting = false
+    setTimeout( _ => this.isDeleting = false, 90)
+    
   }
 
 }
