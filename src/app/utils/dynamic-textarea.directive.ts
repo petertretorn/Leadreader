@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, HostBinding } from '@angular/core';
 import { ElementRef } from "@angular/core";
 import { Renderer2 } from "@angular/core";
 import { HostListener } from "@angular/core";
@@ -12,6 +12,8 @@ export class DynamicTextareaDirective {
   keyup() {
     this.resizeElement()
   }
+
+  @HostBinding('style.height') height: string
 
   @Input('lrDynamicTextarea') isFocus
 
@@ -27,7 +29,7 @@ export class DynamicTextareaDirective {
     this.renderer.setStyle(this.elementRef.nativeElement, "height", "0px")
 
     const newHeight = this.elementRef.nativeElement.scrollHeight - 15 + "px"
-
     this.renderer.setStyle(this.elementRef.nativeElement, "height", newHeight)
+    // this.height = newHeight
   }
 }

@@ -21,11 +21,9 @@
 
     </div>
 
-    <div *ngIf="!!currentReading" class="current-reading">
-      <lr-reading-detail [isOwner]="isOwner" [reading]="currentReading" (deleteNote)="deleteNote($event)"
+      <lr-reading-detail *ngIf="!!currentReading" [isOwner]="isOwner" [reading]="currentReading" (deleteNote)="deleteNote($event)"
         (updateReading)="updateReading($event)">
       </lr-reading-detail>
-    </div>
 
   </div>
 

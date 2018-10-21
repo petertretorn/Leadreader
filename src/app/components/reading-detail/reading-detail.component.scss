@@ -1,7 +1,16 @@
+:host {
+  height: 82vh;
+  overflow-y: scroll;
+}
+
+:host::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 .wrapper {
   width: 100%;
 }
-
 
 @mixin left-margin {
   margin-left: 1rem;
@@ -80,6 +89,11 @@ textarea {
 
 /* Small Screens */
 @media (max-width: 560px) {
-  .book--image__is-mobile {
+  :host {
+    border-top: 0.5px #999 solid;
+    padding-top: 2rem;
+
+    height: initial;
+    overflow-y: initial;
   }
 }

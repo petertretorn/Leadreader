@@ -18,29 +18,11 @@
   }
 }
 
-.current-reading {
-  height: 82vh;
-  overflow-y: scroll;
-}
-
-.current-reading::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
 /* Small Screens */
 @media (max-width: 560px) {
   .grid {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
-  }
-
-  .current-reading {
-    border-top: 0.5px #999 solid;
-    padding-top: 2rem;
-
-    height: initial;
-    overflow-y: initial;
   }
 }
 

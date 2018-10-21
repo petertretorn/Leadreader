@@ -99,7 +99,6 @@ export class ReadingsComponent implements OnInit, OnDestroy {
 
     if (isDeletingCurrent) {
       this.readingDetailComponent.currentState = 'none'
-      console.log('isDeletingCurrent')
     }
 
     this.readingsService
@@ -112,7 +111,6 @@ export class ReadingsComponent implements OnInit, OnDestroy {
   }
 
   selectReading(reading: Reading, setToNone: boolean = true) {
-    console.log('selectReading')
     if (setToNone) this.readingDetailComponent.currentState = 'none'
     setTimeout( _ => this.currentReading = reading, 200)
   }

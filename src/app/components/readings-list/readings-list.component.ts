@@ -37,7 +37,7 @@ export class ReadingsListComponent implements OnInit, OnChanges {
 
   delete(reading: Reading) {
     this.deleteReading.emit(reading)
-    setTimeout( _ => this.isDeleting = false, 90)
+    setTimeout( _ => this.isDeleting = false, 1)
     
   }
 
