@@ -7,6 +7,12 @@
   }
 }
 
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .reader__image {
   width: auto;
   height: 5rem;

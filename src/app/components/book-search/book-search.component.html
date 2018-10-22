@@ -1,7 +1,7 @@
 <div *ngIf="bookData">
   <div class="center">
     <mat-form-field>
-      <input #term matInput placeholder="Search book" (keyup)="subject$.next(term.value)">
+      <input #term matInput placeholder="Search book" (keyup)="termSubject$.next(term.value)">
       <button mat-button *ngIf="term" matSuffix mat-icon-button aria-label="Clear" (click)="term.value=''">
         <mat-icon>close</mat-icon>
       </button>

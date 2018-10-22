@@ -23,7 +23,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   bookData: any[] = [];
 
-  subject$ = new Subject<string>();
+  termSubject$ = new Subject<string>();
 
   constructor(
     private apiService: GoogleApiService,
@@ -34,10 +34,9 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.apiService
-      .lookAheadSearch(this.subject$)
+      .lookaheadSearch(this.termSubject$)
       .subscribe((bookData: any) => {
-        console.log("lookAheadSearch");
-        this.handleBookDate(bookData);
+        this.handleBookData(bookData);
       });
   }
 
@@ -45,7 +44,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  handleBookDate(bookData: any) {
+  handleBookData(bookData: any) {
     Object.values(bookData).forEach((bd: any) => {
       if (!bd.volumeInfo.imageLinks) {
         bd.volumeInfo.imageLinks = {
@@ -68,7 +67,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  hydrateBook(volumeInfo: any) {
+  hydrateBook(volumeInfo: any): Book {
     const title = !!volumeInfo.title ? volumeInfo.title : "no title";
 
     const author = !!volumeInfo.authors
@@ -89,15 +88,13 @@ export class BookSearchComponent implements OnInit, OnDestroy {
       ? volumeInfo.publisher
       : "publisher n/a";
 
-    const book: Book = {
+    return {
       title,
       author,
       categories,
       imageUrl,
       published,
       publisher
-    };
-
-    return book;
+    }
   }
 }

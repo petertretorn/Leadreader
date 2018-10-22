@@ -54,7 +54,6 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   public currentState: string
 
   @ViewChild(MatCheckbox) isPrivateCheckBox: MatCheckbox;
-  @ViewChild("focus") focusElement: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,13 +66,9 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // setTimeout( _ => this.currentState = 'none', 1)
-    // setTimeout( _ => this.currentState = 'done', 1)
     this.currentState = 'done'
     if (!!changes.currentReading && !!changes.currentReading.currentValue) { 
       this.currentState = 'done'
-      // setTimeout( _ => this.currentState = 'none', 1)
-      // setTimeout( _ => this.currentState = 'done', 2)
     }
   }
 

@@ -55,6 +55,7 @@
   justify-content: space-between;
   margin-bottom: 1rem;
 
+  
   img {
     width: auto;
     height: 14rem;
@@ -63,7 +64,7 @@
   }
 }
 
-.reading-header--book {
+.reading-header__book {
   display: flex;
   padding: 1rem;
   border-left: 1.5px sandybrown solid;

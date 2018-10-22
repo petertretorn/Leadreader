@@ -12,7 +12,7 @@ export class GoogleApiService {
 
   url = "https://www.googleapis.com/books/v1/volumes?q=";
 
-  lookAheadSearch(serchTerm$: Observable<string>): any {
+  lookaheadSearch(serchTerm$: Observable<string>): any {
     return serchTerm$.pipe(
       filter(term => !!term),
       debounceTime(400),

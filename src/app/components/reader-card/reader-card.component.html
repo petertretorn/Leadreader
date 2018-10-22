@@ -1,6 +1,9 @@
 <div *ngIf="!!reader" class="reader shadow" (click)="gotoReader(reader.uid)">
 
-  <img class="reader__image shadow" [src]="reader.photoURL" alt="">
+  <div class="left">
+    <img class="reader__image shadow" [src]="reader.photoURL" alt="">
+    <i class="fas fa-user-edit"></i>
+  </div>
 
   <div class="reader__master-data">
 
@@ -8,12 +11,12 @@
       <span class="info-pair--property">Country</span>
       <span>{{reader.country | defaultValue}}</span>
     </div>
-   
+
     <div class="info-pair">
       <span class="info-pair--property">Favorite Book</span>
       <span>{{reader.favoriteBook | defaultValue}}</span>
     </div>
- 
+
     <div class="info-pair">
       <span class="info-pair--property">Favorite Quote</span>
       <span>{{reader.favoriteqoute | defaultValue}}</span>

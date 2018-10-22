@@ -29,7 +29,6 @@ export class ReadingsComponent implements OnInit, OnDestroy {
   currentReading: Reading = null
   isDeleting: boolean = false
   isOwner: boolean = false
-  subscriptions: Subscription[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -54,24 +53,21 @@ export class ReadingsComponent implements OnInit, OnDestroy {
         this.isOwner = (this.userId === reader.uid)
       })
 
-      const subscription = this.readingsService.getReadingsForUser(this.userId).pipe(
+      this.readingsService.getReadingsForUser(this.userId).pipe(
         take(1)
       ).subscribe(readings => {
         this.readings = readings.sort( (r1, r2) => {
-          return (r1.dateCreated < r2.dateCreated) ? 1 : 0 
+          return (r1.dateCreated < r2.dateCreated) ? 1 : -1 
          } )
 
          this.currentReading = this.readings[0]
       });
-
-      this.subscriptions.push(subscription)
 
     });
     
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe())
   }
 
   editProfile(reader: Reader) {
