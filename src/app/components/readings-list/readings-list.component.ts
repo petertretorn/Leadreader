@@ -14,7 +14,6 @@ export class ReadingsListComponent implements OnInit, OnChanges {
   @Input() currentReading: Reading
   @Input() isOwner: boolean
 
-  @Output() deleteReading = new EventEmitter();
   @Output() selectReading = new EventEmitter();
 
   isDeleting: boolean
@@ -30,15 +29,4 @@ export class ReadingsListComponent implements OnInit, OnChanges {
     this.isOwner = (changes.isOwner) ? changes.isOwner.currentValue : this.isOwner
     this.readings = (changes.readings) ? changes.readings.currentValue : this.readings
   }
-
-  select(reading: Reading) {
-
-  }
-
-  delete(reading: Reading) {
-    this.deleteReading.emit(reading)
-    setTimeout( _ => this.isDeleting = false, 1)
-    
-  }
-
 }

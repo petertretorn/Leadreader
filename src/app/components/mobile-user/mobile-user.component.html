@@ -1,1 +1,1 @@
-<lr-user *ngIf="auth.user$ | async as user" [user]="user" (edit)="editProfile($event)"></lr-user>
+<lr-user *ngIf="auth.user$ | async as user" [reader]="user" (edit)="editProfile($event)"></lr-user>

@@ -7,6 +7,7 @@
 
   <div class="reader__master-data">
 
+      {{reader.fullName || reader.displayName }}
     <div class="info-pair">
       <span class="info-pair--property">Country</span>
       <span>{{reader.country | defaultValue}}</span>

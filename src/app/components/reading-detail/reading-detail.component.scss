@@ -52,24 +52,32 @@
 
 .reading-header {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 1rem;
 
   
   img {
     width: auto;
-    height: 14rem;
-    margin-right: 1.2rem; 
+    height: 16rem;
+    margin-right: 1rem; 
 
   }
 }
 
+.mat-form-field-infix {
+  width: 90px;
+}
 .reading-header__book {
   display: flex;
   padding: 1rem;
   border-left: 1.5px sandybrown solid;
+  padding-bottom: 0;
 }
 
+.reading-header__controls {
+  // display: flex;
+  margin-left: 1rem;
+  // flex-direction: column-reverse;
+}
 
 textarea[name="quote"] {
   font-style: oblique;

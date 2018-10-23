@@ -7,18 +7,14 @@
     </a>
   </div>
 
-  <div *ngFor="let reading of readings" (click)="!isDeleting ? selectReading.emit(reading) : null">
+  <div *ngFor="let reading of readings" (click)="selectReading.emit(reading)">
 
-    <div class="reading shadow" *ngIf="!reading.isPrivate || isOwner" 
+    <div class="reading shadow" *ngIf="!reading.status === 'published' || isOwner" 
     [ngClass]="{'reading__active': !!currentReading && currentReading?.id === reading.id}">
       
       <div class="book-info">
         <span class="title">{{reading.book.title}}</span>
         <span class="author">{{reading.book.author}}</span>
-        <div *ngIf="isOwner" class="tooltip">
-          <i (click)="isDeleting = true; delete(reading)" class="delete clickable far fa-trash-alt"></i>
-          <span class="tooltiptext">Delete Reading</span>
-        </div>
       </div>
 
       <img [src]="reading.book.imageUrl" alt="book cover">

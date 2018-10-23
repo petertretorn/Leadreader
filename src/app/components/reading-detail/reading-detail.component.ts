@@ -44,6 +44,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   @Input() reading: Reading;
   @Input() isOwner: boolean;
 
+  @Output() deleteReading = new EventEmitter();
   @Output() public deleteNote = new EventEmitter<string>();
   @Output() public updateReading = new EventEmitter<Reading>();
 
@@ -51,6 +52,9 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   isInEditMode = {};
   newQuote: QuoteNote = null;
   content: string
+  statuses: string[] = ['private', 'published']
+
+
   public currentState: string
 
   @ViewChild(MatCheckbox) isPrivateCheckBox: MatCheckbox;
@@ -72,9 +76,8 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  togglePrivate() {
-    this.reading.isPrivate = !this.reading.isPrivate;
-    this.isPrivateCheckBox.toggle();
+  changeStatus(status: string) {
+    this.reading.status = status
     this.updateReading.emit(this.reading);
   }
 

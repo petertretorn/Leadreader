@@ -32,12 +32,21 @@
             <span class="info-pair--property">Year Published</span>
             <span>{{ reading.book.published | date | defaultValue }}</span>
           </div>
+          <mat-form-field *ngIf="isOwner">
+              <mat-select (selectionChange)="changeStatus($event.value)" placeholder="Privacy" [(ngModel)]="reading.status" name="status">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="isOwner" class="reading-header__controls">
+            <i (click)="deleteReading.emit(reading)" class="far fa-trash-alt"></i>
         </div>
       </div>
 
-      <div *ngIf="isOwner" class="reading-header--controls">
-        <mat-checkbox [checked]="reading.isPrivate" (change)="togglePrivate()">Private</mat-checkbox>
-      </div>
+
 
     </div>
 

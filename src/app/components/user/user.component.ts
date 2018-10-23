@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  @Input() user: Reader
+  @Input() reader: Reader
 
   @Output() public edit = new EventEmitter()
 

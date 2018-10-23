@@ -1,22 +1,22 @@
 .wrapper {
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 5rem;
+  grid-template-columns: 2fr 4fr 1fr;
+  grid-gap: 3rem;
 }
 
-// .reader-section {
-//   display: flex;
-//   flex-direction: column;
+.reader-section {
+  display: flex;
+  flex-direction: column;
 
-//   .reader-section__reader {
-//     margin-bottom: 1.5rem;  
-//   }
-// }
+  .reader-section__reader {
+    margin-bottom: 1.5rem;  
+  }
+}
 
 /* Small Screens */
 @media (max-width: 560px) {

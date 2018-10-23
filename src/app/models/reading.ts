@@ -10,9 +10,10 @@ export class Reading {
     id: string
     userId: string
     book: Book
-    dateCreated: Date;
+    dateCreated: Date
     quoteNotes: QuoteNote[]
     isPrivate: boolean
+    status: string
     owner: Reader
     members: Reader[]
 }
