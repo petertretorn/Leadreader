@@ -1,27 +1,31 @@
-<div *ngIf="!!readings" class="readings-section">
+<div class="readings-section">
 
   <div class="readings-column-header heading-bottom-margin">
     <div class="heading">Readings</div>
     <a *ngIf="isOwner" [routerLink]="['app/search-book']" class="action-buttom">
-      New&nbsp;<i class="fas fa-plus-circle"></i>
+      New&nbsp;
+      <i class="fas fa-plus-circle"></i>
     </a>
   </div>
 
-  <div *ngFor="let reading of readings" (click)="selectReading.emit(reading)">
+  <ng-container *ngIf="readings.length > 0; else noreadings">
 
-    <div class="reading shadow" *ngIf="!reading.status === 'published' || isOwner" 
-    [ngClass]="{'reading__active': !!currentReading && currentReading?.id === reading.id}">
-      
-      <div class="book-info">
-        <span class="title">{{reading.book.title}}</span>
-        <span class="author">{{reading.book.author}}</span>
+    <div *ngFor="let reading of readings" (click)="selectReading.emit(reading)">
+
+      <div class="reading shadow" [ngClass]="{'reading__active': !!currentReading && currentReading?.id === reading.id}">
+
+        <div class="book-info">
+          <span class="title">{{reading.book.title}}</span>
+          <span class="author">{{reading.book.author}}</span>
+        </div>
+
+        <img [src]="reading.book.imageUrl" alt="book cover">
+
       </div>
-
-      <img [src]="reading.book.imageUrl" alt="book cover">
-
     </div>
 
-
-  </div>
+  </ng-container>
 
 </div>
+
+<ng-template #noreadings>Create Your First Reading</ng-template>

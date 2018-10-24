@@ -50,19 +50,20 @@ export class ReadingsComponent implements OnInit, OnDestroy {
 
       this.auth.reader$.subscribe(reader => {
         this.isOwner = this.userId === reader.uid;
+        console.log('this.isOwner', this.isOwner)
       });
 
       this.readingsService
         .getReadingsForUser(this.userId)
         .pipe(take(1))
-        .subscribe(readings => {
-          this.readings = readings.sort((r1, r2) => {
+        .subscribe(readingsFirestore => {
+          this.readings = readingsFirestore || []
+          this.readings = (this.isOwner) ? this.readings : this.readings.filter(r => r.status === 'published')
+          this.readings = this.readings.sort((r1, r2) => {
             return r1.dateCreated < r2.dateCreated ? 1 : -1;
           });
 
-          this.currentReading = this.isOwner
-            ? this.readings[0]
-            : this.readings.filter(r => !r.isPrivate)[0];
+          this.currentReading = this.readings[0]
         });
     });
   }

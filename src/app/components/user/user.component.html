@@ -1,7 +1,6 @@
 <section *ngIf="!!reader" class="profile-section">
-  <!-- <div class="heading heading-bottom-margin">Reader</div> -->
-  <img class="profile-image shadow" [src]="reader.photoURL" alt="profile picture">
-  <div>by {{reader.fullName}}</div>
+  <img class="profile-image shadow" [src]="reader.photoURL" alt="profile picture"/>
+  <div>by {{reader.fullName || reader.displayName}}</div>
 
 
 

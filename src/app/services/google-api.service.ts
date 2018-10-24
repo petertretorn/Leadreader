@@ -1,8 +1,8 @@
-import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { tap } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { pipe, Observable } from "rxjs";
-import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
@@ -17,7 +17,8 @@ export class GoogleApiService {
       filter(term => !!term),
       debounceTime(400),
       distinctUntilChanged(),
-      switchMap( term => this.searchApi(term) )
+      switchMap( term => this.http.get<any>(`${this.url}${term}`)),
+      map(response => response.items) 
     )
   }
 

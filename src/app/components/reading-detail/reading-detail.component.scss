@@ -1,6 +1,8 @@
 :host {
   height: 82vh;
   overflow-y: scroll;
+  width: 100%;
+  min-width: 7rem;
 }
 
 :host::-webkit-scrollbar {
@@ -8,14 +10,9 @@
   background: transparent;
 }
 
-.wrapper {
-  width: 100%;
-}
-
 @mixin left-margin {
   margin-left: 1rem;
 }
-
 
 .posting {
   padding: 10px;

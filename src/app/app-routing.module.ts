@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: "home",
-        component: BookSearchComponent
+        redirectTo: 'community'
       },
       {
         path: "community",

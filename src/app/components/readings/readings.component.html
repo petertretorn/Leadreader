@@ -1,32 +1,24 @@
-<div class="wrapper">
-  <div class="grid">
+<div class="grid">
 
-    <div class="reader-section">
-      <lr-readings-list *ngIf="!!readings" [isOwner]="isOwner" [readings]="readings" [currentReading]="currentReading"
-        (selectReading)="selectReading($event)">
-      </lr-readings-list>
-    </div>
+  <lr-readings-list *ngIf="!!readings" [isOwner]="isOwner" [readings]="readings" [currentReading]="currentReading" (selectReading)="selectReading($event)">
+  </lr-readings-list>
 
-    <lr-reading-detail *ngIf="!!currentReading" [isOwner]="isOwner" [reading]="currentReading"
-      (deleteReading)="deleteReading($event)"
-      (deleteNote)="deleteNote($event)"
-      (updateReading)="updateReading($event)">
-    </lr-reading-detail>
+  <lr-reading-detail [isOwner]="isOwner" [reading]="currentReading" (deleteReading)="deleteReading($event)"
+    (deleteNote)="deleteNote($event)" (updateReading)="updateReading($event)">
+  </lr-reading-detail>
 
-    <!-- <div class="reader-section__reader" *ngIf="!!reader">
-      <div class="readings-column-header heading-bottom-margin">
-        <div class="heading">Reader</div>
-        <a *ngIf="isOwner" (click)="editProfile(reader)">
-          <i class="fas fa-user-edit"></i>
-        </a>
+  <lr-user [reader]="reader"></lr-user>
+
+  <!-- <div class="reader-section">
+      <div class="reader-section__reader" *ngIf="!!reader">
+        <div class="readings-column-header heading-bottom-margin">
+          <div class="heading">Reader</div>
+          <a *ngIf="isOwner" (click)="editProfile(reader)">
+            <i class="fas fa-user-edit"></i>
+          </a>
+        </div>
+        <lr-reader-card [reader]="reader"></lr-reader-card>
       </div>
-      <lr-reader-card [reader]="reader"></lr-reader-card>
     </div> -->
-
-    <lr-user [reader]="reader"></lr-user>
-
-
-
-  </div>
 
 </div>
