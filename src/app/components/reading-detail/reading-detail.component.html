@@ -46,14 +46,12 @@
         </div>
       </div>
 
-
-
     </div>
 
     <lr-quote-note *ngFor="let quoteNote of reading.quoteNotes"
       [isOwner]="isOwner"
-      [quoteNote]="quoteNote" 
-      [isEditing]="editModeMap[quoteNote.id]"
+      [quoteNote]="quoteNote"
+      [isEditing]="!quoteNote.id"
       (deleteNote)="deleteNote.emit($event)" 
       (saveNote)="saveNote($event)">
     </lr-quote-note>
@@ -61,7 +59,7 @@
     <div>
       <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
     </div>
-
+<!-- 
     <div class="new-note" *ngIf="!!newQuote && isOwner">
       <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard" placeholder="quote">
       </textarea>
@@ -71,7 +69,7 @@
       <div>
         <button mat-raised-button (click)="saveNewNote()">Save</button>
       </div>
-    </div>
+    </div> -->
 
 
   </div>

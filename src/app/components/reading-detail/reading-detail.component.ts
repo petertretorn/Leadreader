@@ -1,7 +1,7 @@
 import { QuoteNote } from "src/app/models/quote-note";
 import { NoteDialogComponent } from "./../note-dialog/note-dialog.component";
 import { Reading } from "./../../models/reading";
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ReadingsService } from "../../services/readings.service";
 import { MatDialog, MatCheckbox } from "@angular/material";
@@ -23,77 +23,85 @@ import { OnChanges } from "@angular/core/src/metadata/lifecycle_hooks";
   templateUrl: "./reading-detail.component.html",
   styleUrls: ["./reading-detail.component.scss"],
   animations: [
-    trigger('fade-in', [
-      state('done', style({
-        opacity: 1
-      })),
-      state('none', style({
-        opacity: 0
-      })),
-      transition('none => done', [
-        animate('0.5s ease-in')
-      ]),
-      transition('done => none', [
-        animate('0.2s')
-      ])
+    trigger("fade-in", [
+      state(
+        "done",
+        style({
+          opacity: 1
+        })
+      ),
+      state(
+        "none",
+        style({
+          opacity: 0
+        })
+      ),
+      transition("none => done", [animate("0.5s ease-in")]),
+      transition("done => none", [animate("0.2s")])
     ])
   ]
 })
 export class ReadingDetailComponent implements OnInit, OnChanges {
-  
-  @Input() reading: Reading;
-  @Input() isOwner: boolean;
+  @Input()
+  reading: Reading;
+  @Input()
+  isOwner: boolean;
 
-  @Output() deleteReading = new EventEmitter();
-  @Output() public deleteNote = new EventEmitter<string>();
-  @Output() public updateReading = new EventEmitter<Reading>();
+  @Output()
+  deleteReading = new EventEmitter();
+  @Output()
+  public deleteNote = new EventEmitter<string>();
+  @Output()
+  public updateReading = new EventEmitter<Reading>();
 
-  isEditingNote: boolean = false;
-  editModeMap = {};
-  newQuote: QuoteNote = null;
-  content: string
-  statuses: string[] = ['private', 'published']
+  newQuote: boolean = false;
+  content: string;
+  statuses: string[] = ["private", "published"];
 
+  public currentState: string;
 
-  public currentState: string
-
-  @ViewChild(MatCheckbox) isPrivateCheckBox: MatCheckbox;
+  @ViewChild(MatCheckbox)
+  isPrivateCheckBox: MatCheckbox;
 
   constructor(
     private route: ActivatedRoute,
     private readingsService: ReadingsService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.currentState = 'done'
+    this.currentState = "done";
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentState = 'done'
-    if (!!changes.currentReading && !!changes.currentReading.currentValue) { 
-      this.currentState = 'done'
+    this.currentState = "done";
+    if (!!changes.currentReading && !!changes.currentReading.currentValue) {
+      this.currentState = "done";
     }
   }
 
   changeStatus(status: string) {
-    this.reading.status = status
+    this.reading.status = status;
     this.updateReading.emit(this.reading);
   }
 
-  saveNote(noteId: string) {
-    this.updateReading.emit(this.reading);
+  saveNote(quoteNote: QuoteNote) {
+    !!quoteNote.id
+      ? this.updateReading.emit(this.reading) 
+      : this.saveNewNote(quoteNote);
   }
 
   addNewNote() {
-    this.newQuote = new QuoteNote();
+    this.newQuote = true
+
+    this.reading.quoteNotes.push(new QuoteNote());
   }
 
-  saveNewNote() {
+  saveNewNote(newQuote: QuoteNote) {
     this.reading.quoteNotes = this.reading.quoteNotes || [];
-    this.newQuote.created = new Date();
-    this.readingsService.addNoteToReading(this.reading, this.newQuote);
+    newQuote.created = new Date();
+    this.readingsService.addNoteToReading(this.reading, newQuote);
 
-    this.newQuote = null;
+    this.newQuote = false;
   }
 }

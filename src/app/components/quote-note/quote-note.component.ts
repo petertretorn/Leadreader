@@ -1,5 +1,5 @@
+import { QuoteNote } from './../../models/quote-note';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QuoteNote } from 'src/app/models/quote-note';
 import { Reading } from '../../models/reading';
 
 @Component({
@@ -14,7 +14,7 @@ export class QuoteNoteComponent implements OnInit {
   @Input() isOwner: boolean
 
   @Output() public deleteNote = new EventEmitter<string>();
-  @Output() public saveNote = new EventEmitter<string>();
+  @Output() public saveNote = new EventEmitter<QuoteNote>();
 
   constructor() { }
 
@@ -25,9 +25,9 @@ export class QuoteNoteComponent implements OnInit {
     this.isEditing = true;
   }
 
-  save(noteId: string) {
+  save(quoteNote: QuoteNote) {
     this.isEditing = false;
-    this.saveNote.emit(noteId);
+    this.saveNote.emit(quoteNote);
   }
 
 

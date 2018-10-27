@@ -22,7 +22,7 @@
     <div *ngIf="isOwner">
       <span *ngIf="isEditing">
         <i (click)="isEditing = false" class="clickable fas fa-times"></i>&nbsp;
-        <i (click)="save(quoteNote.id)" class="clickable fas fa-save"></i>
+        <i (click)="save(quoteNote)" class="clickable fas fa-save"></i>
       </span>
       <span *ngIf="!isEditing">
         <i (click)="editNote(quoteNote.id)" class="clickable fas fa-edit"></i>&nbsp;
