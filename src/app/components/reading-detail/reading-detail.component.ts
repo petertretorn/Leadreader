@@ -49,7 +49,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   @Output() public updateReading = new EventEmitter<Reading>();
 
   isEditingNote: boolean = false;
-  isInEditMode = {};
+  editModeMap = {};
   newQuote: QuoteNote = null;
   content: string
   statuses: string[] = ['private', 'published']
@@ -81,12 +81,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
     this.updateReading.emit(this.reading);
   }
 
-  editNote(noteId: string) {
-    this.isInEditMode[noteId] = true;
-  }
-
   saveNote(noteId: string) {
-    this.isInEditMode[noteId] = false;
     this.updateReading.emit(this.reading);
   }
 

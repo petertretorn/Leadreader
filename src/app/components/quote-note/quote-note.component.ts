@@ -1,0 +1,34 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { QuoteNote } from 'src/app/models/quote-note';
+import { Reading } from '../../models/reading';
+
+@Component({
+  selector: 'lr-quote-note',
+  templateUrl: './quote-note.component.html',
+  styleUrls: ['./quote-note.component.scss']
+})
+export class QuoteNoteComponent implements OnInit {
+
+  @Input() quoteNote: QuoteNote
+  @Input() isEditing: boolean
+  @Input() isOwner: boolean
+
+  @Output() public deleteNote = new EventEmitter<string>();
+  @Output() public saveNote = new EventEmitter<string>();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  editNote(noteId: string) {
+    this.isEditing = true;
+  }
+
+  save(noteId: string) {
+    this.isEditing = false;
+    this.saveNote.emit(noteId);
+  }
+
+
+}

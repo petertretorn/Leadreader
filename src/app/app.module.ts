@@ -28,6 +28,7 @@ import { MobileUserComponent } from './components/mobile-user/mobile-user.compon
 import { CommunityComponent } from './components/community/community.component';
 import { ReaderCardComponent } from './components/reader-card/reader-card.component';
 import { DynamicTextareaDirective } from './utils/dynamic-textarea.directive';
+import { QuoteNoteComponent } from './components/quote-note/quote-note.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DynamicTextareaDirective } from './utils/dynamic-textarea.directive';
     MobileUserComponent,
     CommunityComponent,
     ReaderCardComponent,
-    DynamicTextareaDirective
+    DynamicTextareaDirective,
+    QuoteNoteComponent
   ],
   imports: [
     BrowserModule,

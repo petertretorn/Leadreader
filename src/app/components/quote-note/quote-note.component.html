@@ -1,0 +1,35 @@
+<div class="posting shadow">
+
+  <div *ngIf="!isEditing">
+    <div class="posting__quote" [innerHTML]="quoteNote.quote"></div>
+    <br>
+    <div class="posting__note" [innerHTML]="quoteNote.note"></div>
+  </div>
+
+  <div *ngIf="isEditing">
+    <label for="quote">Quote From Book</label>
+    <textarea [lrDynamicTextarea]="true" [(ngModel)]="quoteNote.quote" name="quote" placeholder="quote"></textarea>
+    <label for="note">Your Notes</label>
+    <textarea lrDynamicTextarea [(ngModel)]="quoteNote.note" name="note" placeholder="notes"></textarea>
+  </div>
+
+  <div class="quote-info">
+
+    <div class="posted-date">
+      Posted {{ quoteNote.created | date }}
+    </div>
+
+    <div *ngIf="isOwner">
+      <span *ngIf="isEditing">
+        <i (click)="isEditing = false" class="clickable fas fa-times"></i>&nbsp;
+        <i (click)="save(quoteNote.id)" class="clickable fas fa-save"></i>
+      </span>
+      <span *ngIf="!isEditing">
+        <i (click)="editNote(quoteNote.id)" class="clickable fas fa-edit"></i>&nbsp;
+        <i (click)="deleteNote.emit(quoteNote.id)" class="clickable far fa-trash-alt"></i>
+      </span>
+    </div>
+
+  </div>
+
+</div>

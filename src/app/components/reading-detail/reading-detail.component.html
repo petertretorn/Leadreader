@@ -50,41 +50,13 @@
 
     </div>
 
-    <div *ngFor="let qn of reading.quoteNotes" class="posting shadow">
-
-      <div *ngIf="!isInEditMode[qn.id]">
-        <div class="posting__quote" [innerHTML]="qn.quote"></div>
-        <br>
-        <div class="posting__note" [innerHTML]="qn.note"></div>
-      </div>
-
-      <div *ngIf="isInEditMode[qn.id]">
-        <label for="quote">Quote From Book</label>
-        <textarea [lrDynamicTextarea]="true" [(ngModel)]="qn.quote" name="quote" placeholder="quote"></textarea>
-        <label for="note">Your Notes</label>
-        <textarea lrDynamicTextarea [(ngModel)]="qn.note" name="note" placeholder="notes"></textarea>
-      </div>
-
-      <div class="quote-info">
-
-        <div class="posted-date">
-          Posted {{ qn.created | date }}
-        </div>
-
-        <div *ngIf="isOwner">
-          <span *ngIf="isInEditMode[qn.id]">
-            <i (click)="isInEditMode[qn.id] = false" class="clickable fas fa-times"></i>&nbsp;
-            <i (click)="saveNote(qn.id)" class="clickable fas fa-save"></i>
-          </span>
-          <span *ngIf="!isInEditMode[qn.id]">
-            <i (click)="editNote(qn.id)" class="clickable fas fa-edit"></i>&nbsp;
-            <i (click)="deleteNote.emit(qn.id)" class="clickable far fa-trash-alt"></i>
-          </span>
-        </div>
-
-      </div>
-
-    </div>
+    <lr-quote-note *ngFor="let quoteNote of reading.quoteNotes"
+      [isOwner]="isOwner"
+      [quoteNote]="quoteNote" 
+      [isEditing]="editModeMap[quoteNote.id]"
+      (deleteNote)="deleteNote.emit($event)" 
+      (saveNote)="saveNote($event)">
+    </lr-quote-note>
 
     <div>
       <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
