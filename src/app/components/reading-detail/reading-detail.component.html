@@ -57,20 +57,8 @@
     </lr-quote-note>
 
     <div>
-      <button *ngIf="!newQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
+      <button *ngIf="!isNewQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
     </div>
-<!-- 
-    <div class="new-note" *ngIf="!!newQuote && isOwner">
-      <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.quote" name="quote" wrap="hard" placeholder="quote">
-      </textarea>
-
-      <textarea lrDynamicTextarea [ngClass]="{'visible': !!newQuote}" [(ngModel)]="newQuote.note" name="note" wrap="hard" placeholder="notes"></textarea>
-
-      <div>
-        <button mat-raised-button (click)="saveNewNote()">Save</button>
-      </div>
-    </div> -->
-
 
   </div>
 </div>

@@ -1,16 +1,20 @@
 <div class="posting shadow">
 
   <div *ngIf="!isEditing">
+    <div class="posting__heading">{{quoteNote.heading}}</div>
+    <br>
     <div class="posting__quote" [innerHTML]="quoteNote.quote"></div>
     <br>
     <div class="posting__note" [innerHTML]="quoteNote.note"></div>
   </div>
 
   <div *ngIf="isEditing">
+    <label for="quote">Heading</label>
+    <input type="text" #heading [(ngModel)]="quoteNote.heading" name="heading">
     <label for="quote">Quote From Book</label>
-    <textarea [lrDynamicTextarea]="true" [(ngModel)]="quoteNote.quote" name="quote" placeholder="quote"></textarea>
+    <textarea [lrDynamicTextarea] [(ngModel)]="quoteNote.quote" name="quote"></textarea>
     <label for="note">Your Notes</label>
-    <textarea lrDynamicTextarea [(ngModel)]="quoteNote.note" name="note" placeholder="notes"></textarea>
+    <textarea lrDynamicTextarea [(ngModel)]="quoteNote.note" name="note"></textarea>
   </div>
 
   <div class="quote-info">

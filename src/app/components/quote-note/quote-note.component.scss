@@ -19,6 +19,10 @@
     white-space: pre-wrap;
     @include left-margin;
   }
+  .posting__heading {
+    font-weight: 700;
+    @include left-margin;
+  }
 
   label {
     @include left-margin;
@@ -39,7 +43,7 @@ textarea[name="quote"] {
   font-style: oblique;
 }
 
-textarea {
+textarea, input {
   padding: 0.5rem;
   font-size: 1.2rem;
   display: block;
@@ -47,4 +51,6 @@ textarea {
   border-radius: 3px;
   margin: 1rem;
   margin-top: 0.4rem;
+
+  border: 1px solid #aaa;
 }

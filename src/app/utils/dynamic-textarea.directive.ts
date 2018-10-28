@@ -30,6 +30,5 @@ export class DynamicTextareaDirective {
 
     const newHeight = this.elementRef.nativeElement.scrollHeight - 15 + "px"
     this.renderer.setStyle(this.elementRef.nativeElement, "height", newHeight)
-    // this.height = newHeight
   }
 }

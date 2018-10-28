@@ -42,19 +42,14 @@ import { OnChanges } from "@angular/core/src/metadata/lifecycle_hooks";
   ]
 })
 export class ReadingDetailComponent implements OnInit, OnChanges {
-  @Input()
-  reading: Reading;
-  @Input()
-  isOwner: boolean;
+  @Input() reading: Reading;
+  @Input() isOwner: boolean;
 
-  @Output()
-  deleteReading = new EventEmitter();
-  @Output()
-  public deleteNote = new EventEmitter<string>();
-  @Output()
-  public updateReading = new EventEmitter<Reading>();
+  @Output() deleteReading = new EventEmitter();
+  @Output() public deleteNote = new EventEmitter<string>();
+  @Output() public updateReading = new EventEmitter<Reading>();
 
-  newQuote: boolean = false;
+  isNewQuote: boolean = false;
   content: string;
   statuses: string[] = ["private", "published"];
 
@@ -92,7 +87,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   }
 
   addNewNote() {
-    this.newQuote = true
+    this.isNewQuote = true
 
     this.reading.quoteNotes.push(new QuoteNote());
   }
@@ -102,6 +97,6 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
     newQuote.created = new Date();
     this.readingsService.addNoteToReading(this.reading, newQuote);
 
-    this.newQuote = false;
+    this.isNewQuote = false;
   }
 }
