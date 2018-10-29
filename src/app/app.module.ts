@@ -29,6 +29,7 @@ import { CommunityComponent } from './components/community/community.component';
 import { ReaderCardComponent } from './components/reader-card/reader-card.component';
 import { DynamicTextareaDirective } from './utils/dynamic-textarea.directive';
 import { QuoteNoteComponent } from './components/quote-note/quote-note.component';
+import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { QuoteNoteComponent } from './components/quote-note/quote-note.component
     CommunityComponent,
     ReaderCardComponent,
     DynamicTextareaDirective,
-    QuoteNoteComponent
+    QuoteNoteComponent,
+    BookDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { QuoteNoteComponent } from './components/quote-note/quote-note.component
   ],
   entryComponents: [
     NoteDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    BookDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

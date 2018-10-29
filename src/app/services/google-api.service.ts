@@ -14,9 +14,6 @@ export class GoogleApiService {
 
   lookaheadSearch(serchTerm$: Observable<string>): any {
     return serchTerm$.pipe(
-      filter(term => !!term),
-      debounceTime(400),
-      distinctUntilChanged(),
       switchMap( term => this.http.get<any>(`${this.url}${term}`)),
       map(response => response.items) 
     )

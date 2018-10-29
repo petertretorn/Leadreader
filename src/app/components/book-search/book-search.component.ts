@@ -4,14 +4,15 @@ import { ReadingsService } from "./../../services/readings.service";
 import { Router } from "@angular/router";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { GoogleApiService } from "../../services/google-api.service";
-import { fromEvent, Subject, Subscription } from "rxjs";
-import { map } from "rxjs/operators";
+import { fromEvent, Subject, Subscription, pipe, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { filter } from "rxjs/internal/operators/filter";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
-import { switchMap } from "rxjs/internal/operators/switchMap";
 import { Book } from "../../models/book";
 import { Reading } from "../../models/reading";
+import { MatDialog } from '@angular/material';
+import { BookDialogComponent } from '../book-dialog/book-dialog.component';
 
 @Component({
   selector: "lr-book-search",
@@ -22,6 +23,8 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   bookData: any[] = [];
+  isSearching: boolean
+  defaultCover = 'assets/images/no_cover.jpg'
 
   termSubject$ = new Subject<string>();
 
@@ -29,14 +32,24 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     private apiService: GoogleApiService,
     private readingsService: ReadingsService,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
+
+    const input$ = this.termSubject$.pipe(
+      filter(term => !!term),
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap(_ => this.isSearching = true)
+    )
+
     this.subscription = this.apiService
-      .lookaheadSearch(this.termSubject$)
+      .lookaheadSearch(input$)
       .subscribe((bookData: any) => {
-        this.handleBookData(bookData);
+        this.handleBookData(bookData)
+        this.isSearching = false
       });
   }
 
@@ -48,15 +61,32 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     Object.values(bookData).forEach((bd: any) => {
       if (!bd.volumeInfo.imageLinks) {
         bd.volumeInfo.imageLinks = {
-          thumbnail: "assets/images/no_cover.jpg"
+          thumbnail: this.defaultCover
         };
       }
     });
     this.bookData = bookData;
   }
 
-  addReading(volumeInfo: any) {
+  addManually() {
+    const dialogRef = this.dialog.open(BookDialogComponent, {
+      width: "340px",
+    });
+
+    dialogRef.afterClosed().subscribe((book: Book) => {
+      if (book) {
+        book.imageUrl = this.defaultCover
+        this.createReading(book)
+      }
+    });
+  }
+
+  onAddClicked(volumeInfo: any) {
     const book = this.hydrateBook(volumeInfo)
+    this.createReading(book)
+  }
+
+  createReading(book: Book) {
     const reading = new Reading(book);
     reading.dateCreated = new Date();
 

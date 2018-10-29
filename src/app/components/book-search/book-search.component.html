@@ -1,33 +1,48 @@
-<div *ngIf="bookData">
-  <div class="center">
-    <mat-form-field>
-      <input #term matInput placeholder="Search book" (keyup)="termSubject$.next(term.value)">
-      <button mat-button *ngIf="term" matSuffix mat-icon-button aria-label="Clear" (click)="term.value=''">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
+<div class="center">
+  <mat-form-field>
+    <input #term matInput placeholder="Search book" (keyup)="termSubject$.next(term.value)">
+    <button mat-button *ngIf="term" matSuffix mat-icon-button aria-label="Clear" (click)="term.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 </div>
 
-<div *ngIf="bookData; else spinner" class="books">
-  <mat-card class="book-card" *ngFor="let book of bookData">
-    <mat-card-header>
-      <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
-      <mat-card-subtitle>{{ book.volumeInfo.authors && book.volumeInfo.authors[0] }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]='book.volumeInfo.imageLinks.thumbnail' alt="Photo">
-    <mat-card-content>
-      <span *ngFor="let category of book.volumeInfo.categories" class="category">{{ category }}</span>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="addReading(book.volumeInfo)" mat-button>ADD READING</button>
-      <button mat-button>MORE</button>
-    </mat-card-actions>
-  </mat-card>
+<ng-container *ngIf="isSearching; then spinner"></ng-container>
+
+<div *ngIf="!!bookData.length">
+  
+  <div class="center margin-b0ttom">
+    <p>Not finding your book?</p>
+    <button (click)="addManually()" mat-button>Add Manually</button>
+  </div>
+
+  <div class="books">
+    <mat-card class="book-card" *ngFor="let book of bookData">
+      <mat-card-header>
+        <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.volumeInfo.authors && book.volumeInfo.authors[0] }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]='book.volumeInfo.imageLinks.thumbnail' alt="Photo">
+      <mat-card-content>
+        <span *ngFor="let category of book.volumeInfo.categories" class="category">{{ category }}</span>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="onAddClicked(book.volumeInfo)" mat-button>ADD READING</button>
+        <button mat-button>MORE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+
 </div>
 
 <ng-template #spinner>
   <div class="spinner">
     <mat-spinner></mat-spinner>
   </div>
+</ng-template>
+
+<ng-template #manual>
+  <p>Not finding your book?</p>
+  <button (click)="addManually()" mat-button>Add Manually</button>
 </ng-template>

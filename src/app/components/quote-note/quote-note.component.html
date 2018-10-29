@@ -1,21 +1,36 @@
 <div class="posting shadow">
 
-  <div *ngIf="!isEditing">
-    <div class="posting__heading">{{quoteNote.heading}}</div>
+  <ng-container *ngIf="isEditing; then editingTemplate; else notEditingTemplate"></ng-container>
+
+  <ng-template #notEditingTemplate>
+    <div class="flex-row-between">
+      <div class="posting__heading">{{quoteNote.heading}}</div>
+      <span>
+        <i (click)="editNote(quoteNote.id)" class="clickable fas fa-edit"></i>&nbsp;
+        <i (click)="deleteNote.emit(quoteNote.id)" class="clickable far fa-trash-alt"></i>
+      </span>
+    </div>
     <br>
     <div class="posting__quote" [innerHTML]="quoteNote.quote"></div>
     <br>
     <div class="posting__note" [innerHTML]="quoteNote.note"></div>
-  </div>
+  </ng-template>
 
-  <div *ngIf="isEditing">
-    <label for="quote">Heading</label>
+  <ng-template #editingTemplate>
+    <div class="flex-row-between">
+      <label for="heading">Heading</label>
+      <span>
+        <i (click)="isEditing = false" class="clickable fas fa-times"></i>&nbsp;
+        <i (click)="save(quoteNote)" class="clickable fas fa-save"></i>
+      </span>
+    </div>
+
     <input type="text" #heading [(ngModel)]="quoteNote.heading" name="heading">
     <label for="quote">Quote From Book</label>
-    <textarea [lrDynamicTextarea] [(ngModel)]="quoteNote.quote" name="quote"></textarea>
+    <textarea lrDynamicTextarea [(ngModel)]="quoteNote.quote" name="quote"></textarea>
     <label for="note">Your Notes</label>
     <textarea lrDynamicTextarea [(ngModel)]="quoteNote.note" name="note"></textarea>
-  </div>
+  </ng-template>
 
   <div class="quote-info">
 
@@ -23,17 +38,7 @@
       Posted {{ quoteNote.created | date }}
     </div>
 
-    <div *ngIf="isOwner">
-      <span *ngIf="isEditing">
-        <i (click)="isEditing = false" class="clickable fas fa-times"></i>&nbsp;
-        <i (click)="save(quoteNote)" class="clickable fas fa-save"></i>
-      </span>
-      <span *ngIf="!isEditing">
-        <i (click)="editNote(quoteNote.id)" class="clickable fas fa-edit"></i>&nbsp;
-        <i (click)="deleteNote.emit(quoteNote.id)" class="clickable far fa-trash-alt"></i>
-      </span>
-    </div>
-
+    <!-- <a class="posted-date" href="">Comments</a> -->
   </div>
 
 </div>

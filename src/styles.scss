@@ -64,10 +64,19 @@ a {
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
+.margin-b0ttom {
+  margin-bottom: 1rem;
+}
+
 .action-buttom {
   padding: 0.4rem;
   background: tomato;
   border-radius: 3px;
+}
+
+.flex-row-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .readings-column-header {

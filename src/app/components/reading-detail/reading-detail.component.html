@@ -57,7 +57,7 @@
     </lr-quote-note>
 
     <div>
-      <button *ngIf="!isNewQuote && isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
+      <button *ngIf="isOwner" mat-raised-button (click)="addNewNote()">NEW NOTE</button>
     </div>
 
   </div>
