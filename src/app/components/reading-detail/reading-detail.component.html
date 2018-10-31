@@ -42,18 +42,17 @@
         </div>
 
         <div *ngIf="isOwner" class="reading-header__controls">
-          <i (click)="deleteReading.emit(reading)" class="far fa-trash-alt"></i>
+          <span>
+            <i (click)="editReading.emit(reading)" class="clickable fas fa-edit"></i>&nbsp;
+            <i (click)="deleteReading.emit(reading)" class="clickable far fa-trash-alt"></i>
+          </span>
         </div>
       </div>
 
     </div>
 
-    <lr-quote-note *ngFor="let quoteNote of reading.quoteNotes"
-      [isOwner]="isOwner"
-      [quoteNote]="quoteNote"
-      [isEditing]="!quoteNote.id"
-      (deleteNote)="deleteNote.emit($event)" 
-      (saveNote)="saveNote($event)">
+    <lr-quote-note *ngFor="let quoteNote of reading.quoteNotes" [isOwner]="isOwner" [quoteNote]="quoteNote" [isEditing]="!quoteNote.id"
+      (deleteNote)="deleteNote.emit($event)" (saveNote)="saveNote($event)">
     </lr-quote-note>
 
     <div>

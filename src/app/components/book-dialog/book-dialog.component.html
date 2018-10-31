@@ -1,28 +1,52 @@
 <div class="new">
-    <div>
-      <mat-form-field>
-        <input [(ngModel)]="book.title" name="" matInput placeholder="Title" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input [(ngModel)]="book.author" name="" matInput placeholder="Author" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input [(ngModel)]="book.categories" name="" matInput placeholder="Category" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input [(ngModel)]="book.publisher" name="" matInput placeholder="Publisher" />
-      </mat-form-field>
-    </div>
-  
-    <div class="btn-wrapper">
-      <button (click)="save()" mat-button mat-raised-button color="primary">SAVE</button>
-      <button (click)="cancel()" mat-button mat-raised-button>CANCEL</button>
-    </div>
+  <div>
+    <mat-form-field>
+      <input [(ngModel)]="book.title" name="" matInput placeholder="Title" />
+    </mat-form-field>
   </div>
-  
+  <div>
+    <mat-form-field>
+      <input [(ngModel)]="book.author" name="" matInput placeholder="Author" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input [(ngModel)]="book.categories" name="" matInput placeholder="Category" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input [(ngModel)]="book.publisher" name="" matInput placeholder="Publisher" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input [(ngModel)]="book.published" matInput [matDatepicker]="picker" placeholder="Date published">
+
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button (click)="fileInput.click()" mat-raised-button>
+      <mat-icon>library_add</mat-icon>
+      <span>Add Cover</span>
+      <input #fileInput type="file" (change)="handleFile($event)" style="display: none" />
+    </button>&nbsp;
+    <ng-container *ngIf="isUploading; else done">
+        <i class="fas fa-spinner fa-spin"></i>
+    </ng-container>
+    <ng-template #done>
+        <span class="small-font">{{ book.imageName }}</span>  
+    </ng-template>
+  </div>
+
+  <br>
+
+  <div class="btn-wrapper">
+    <button (click)="save()" mat-button mat-raised-button color="primary">SAVE</button>
+    <button (click)="cancel()" mat-button mat-raised-button>CANCEL</button>
+  </div>
+</div>

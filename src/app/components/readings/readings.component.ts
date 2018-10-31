@@ -13,6 +13,10 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 import { ReadingDetailComponent } from "../reading-detail/reading-detail.component";
+import { FileService } from '../../services/file.service';
+import { BookDialogComponent } from '../book-dialog/book-dialog.component';
+import { Book } from '../../models/book';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "lr-readings",
@@ -34,8 +38,9 @@ export class ReadingsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private readingsService: ReadingsService,
     private readersService: ReadersService,
-    private router: Router,
     public auth: AuthService,
+    private fileService: FileService,
+    private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
@@ -84,9 +89,9 @@ export class ReadingsComponent implements OnInit, OnDestroy {
   }
 
   deleteNote(noteId: string) {
-    const sb: MatSnackBarRef<SimpleSnackBar> = this.openSnackbar("Sure to Delete?","DELETE", 1500);
+    const snackBar: MatSnackBarRef<SimpleSnackBar> = this.openSnackbar("Sure to Delete?","DELETE", 1500);
 
-    sb.onAction().subscribe(() => {
+    snackBar.onAction().subscribe(() => {
       this.currentReading.quoteNotes = this.currentReading.quoteNotes.filter(
         qn => qn.id !== noteId
       );
@@ -94,14 +99,33 @@ export class ReadingsComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteReading(reading: Reading) {
-    const sb: MatSnackBarRef<SimpleSnackBar> = this.openSnackbar("Sure to Delete?","DELETE", 1500);
+  editReading(reading: Reading) {
+    const dialogRef = this.dialog.open(BookDialogComponent, {
+      width: "340px",
+      data: { book: reading.book }
+    });
 
-    sb.onAction().subscribe(() => {
+    dialogRef.afterClosed().subscribe((book: Book) => {
+      if (book) {
+        reading.book = book
+        reading.book.imageUrl = reading.book.imageUrl || environment.defaultCover
+        this.updateReading(reading)
+      }
+    });
+  }
+
+  deleteReading(reading: Reading) {
+    const snackBar: MatSnackBarRef<SimpleSnackBar> = this.openSnackbar("Sure to Delete?","DELETE", 1500);
+
+    snackBar.onAction().subscribe(() => {
       const isDeletingCurrent = reading.id === this.currentReading.id;
 
       if (isDeletingCurrent) {
         this.readingDetailComponent.currentState = "none";
+      }
+
+      if (!!reading.book.imageUrl && !!reading.book.imageName) {
+        this.fileService.deleteFile(reading.book.imageName)
       }
 
       this.readingsService.deleteReading(reading).then(() => {

@@ -1,6 +1,8 @@
 <div class="posting shadow">
 
-  <ng-container *ngIf="isEditing; then editingTemplate; else notEditingTemplate"></ng-container>
+  <ng-container *ngIf="isOwner">
+    <ng-container *ngIf="isEditing; then editingTemplate; else notEditingTemplate"></ng-container>
+  </ng-container>
 
   <ng-template #notEditingTemplate>
     <div class="flex-row-between">

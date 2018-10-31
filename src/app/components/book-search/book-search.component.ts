@@ -13,6 +13,7 @@ import { Book } from "../../models/book";
 import { Reading } from "../../models/reading";
 import { MatDialog } from '@angular/material';
 import { BookDialogComponent } from '../book-dialog/book-dialog.component';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "lr-book-search",
@@ -24,7 +25,6 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   bookData: any[] = [];
   isSearching: boolean
-  defaultCover = 'assets/images/no_cover.jpg'
 
   termSubject$ = new Subject<string>();
 
@@ -61,7 +61,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     Object.values(bookData).forEach((bd: any) => {
       if (!bd.volumeInfo.imageLinks) {
         bd.volumeInfo.imageLinks = {
-          thumbnail: this.defaultCover
+          thumbnail: environment.defaultCover
         };
       }
     });
@@ -75,7 +75,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((book: Book) => {
       if (book) {
-        book.imageUrl = this.defaultCover
+        book.imageUrl = book.imageUrl || environment.defaultCover
         this.createReading(book)
       }
     });

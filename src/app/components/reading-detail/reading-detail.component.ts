@@ -47,6 +47,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
 
   @Output() deleteReading = new EventEmitter();
   @Output() public deleteNote = new EventEmitter<string>();
+  @Output() public editReading = new EventEmitter<Reading>();
   @Output() public updateReading = new EventEmitter<Reading>();
 
   isNewQuote: boolean = false;
@@ -69,6 +70,8 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    
+    
     this.currentState = "done";
     if (!!changes.currentReading && !!changes.currentReading.currentValue) {
       this.currentState = "done";
@@ -88,7 +91,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
 
   addNewNote() {
     this.isNewQuote = true
-
+    this.reading.quoteNotes = this.reading.quoteNotes || []
     this.reading.quoteNotes.push(new QuoteNote());
   }
 

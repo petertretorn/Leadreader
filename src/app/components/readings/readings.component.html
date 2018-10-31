@@ -3,8 +3,13 @@
   <lr-readings-list *ngIf="!!readings" [isOwner]="isOwner" [readings]="readings" [currentReading]="currentReading" (selectReading)="selectReading($event)">
   </lr-readings-list>
 
-  <lr-reading-detail [isOwner]="isOwner" [reading]="currentReading" (deleteReading)="deleteReading($event)"
-    (deleteNote)="deleteNote($event)" (updateReading)="updateReading($event)">
+  <lr-reading-detail 
+  [isOwner]="isOwner" 
+  [reading]="currentReading" 
+  (deleteReading)="deleteReading($event)"
+  (deleteNote)="deleteNote($event)"
+  (editReading)="editReading($event)"
+  (updateReading)="updateReading($event)">
   </lr-reading-detail>
 
   <lr-user [reader]="reader"></lr-user>

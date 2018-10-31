@@ -5,4 +5,6 @@ export class Book {
     publisher: string
     categories: string
     imageUrl: string
+    imageName?: string
+    isUpdated?: boolean
 }

@@ -17,7 +17,7 @@ import { ReadingDetailComponent } from './components/reading-detail/reading-deta
 import { NoteDialogComponent } from './components/note-dialog/note-dialog.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
@@ -49,7 +49,7 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
     ReaderCardComponent,
     DynamicTextareaDirective,
     QuoteNoteComponent,
-    BookDialogComponent
+    BookDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +62,7 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     EditorModule
   ],
   entryComponents: [
