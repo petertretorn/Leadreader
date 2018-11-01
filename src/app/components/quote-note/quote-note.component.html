@@ -7,26 +7,15 @@
   <ng-template #notEditingTemplate>
     <div class="flex-row-between">
       <div class="posting__heading">{{quoteNote.heading}}</div>
-      
-      <div>
-        <i class="menu-btn fas fa-ellipsis-v" mat-button [matMenuTriggerFor]="quoteMenu"></i>
-
-        <mat-menu #quoteMenu="matMenu">
-          <a mat-menu-item (click)="editNote(quoteNote.id)">
-            <i class="fas fa-edit"></i>
-            <span> &nbsp;Edit</span>
-          </a>
-          <a mat-menu-item (click)="deleteNote.emit(quoteNote.id)">
-            <i class="far fa-trash-alt"></i>
-            <span> Delete</span>
-          </a>
-        </mat-menu>
-      </div>
-      
+      <lr-drop-down [items]="dropdownItems"></lr-drop-down>
     </div>
+    
     <br>
+    
     <div class="posting__quote" [innerHTML]="quoteNote.quote"></div>
+    
     <br>
+    
     <div class="posting__note" [innerHTML]="quoteNote.note"></div>
   </ng-template>
 

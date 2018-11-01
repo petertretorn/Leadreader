@@ -17,6 +17,7 @@ import { style } from "@angular/animations";
 import { transition } from "@angular/animations";
 import { animate } from "@angular/animations";
 import { OnChanges } from "@angular/core/src/metadata/lifecycle_hooks";
+import { MenuItem } from '../../models/menu-item';
 
 @Component({
   selector: "lr-reading-detail",
@@ -53,6 +54,7 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
   isNewQuote: boolean = false;
   content: string;
   statuses: string[] = ["private", "published"];
+  dropdownItems: MenuItem[]
 
   public currentState: string;
 
@@ -67,11 +69,14 @@ export class ReadingDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.currentState = "done";
+
+    this.dropdownItems = [
+      { text: 'Edit', icon: 'fas fa-edit', handler: () => this.editReading.emit(this.reading)},
+      { text: 'Delete', icon: 'far fa-trash-alt', handler: () => this.deleteReading.emit(this.reading) }
+    ]
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
-    
     this.currentState = "done";
     if (!!changes.currentReading && !!changes.currentReading.currentValue) {
       this.currentState = "done";

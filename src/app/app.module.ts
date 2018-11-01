@@ -30,6 +30,7 @@ import { ReaderCardComponent } from './components/reader-card/reader-card.compon
 import { DynamicTextareaDirective } from './utils/dynamic-textarea.directive';
 import { QuoteNoteComponent } from './components/quote-note/quote-note.component';
 import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
+import { DropDownComponent } from './components/drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
     DynamicTextareaDirective,
     QuoteNoteComponent,
     BookDialogComponent,
+    DropDownComponent,
   ],
   imports: [
     BrowserModule,

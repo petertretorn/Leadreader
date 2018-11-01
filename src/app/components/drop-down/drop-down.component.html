@@ -1,0 +1,11 @@
+<i class="menu-btn fas fa-ellipsis-v" mat-button [matMenuTriggerFor]="menu">
+</i>
+
+<mat-menu #menu="matMenu">
+
+  <a *ngFor="let item of items" mat-menu-item (click)="item.handler()">
+    <i class="{{item.icon}}"></i>
+    <span> &nbsp;{{item.text}}</span>
+  </a>
+  
+</mat-menu>

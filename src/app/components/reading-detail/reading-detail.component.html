@@ -43,21 +43,10 @@
 
         <div *ngIf="isOwner" class="reading-header__controls">
 
-          <i class="menu-btn fas fa-ellipsis-v" mat-button [matMenuTriggerFor]="readingMenu"></i>
-
-          <mat-menu #readingMenu="matMenu">
-            <a mat-menu-item (click)="editReading.emit(reading)">
-              <i class="fas fa-edit"></i>
-              <span> &nbsp;Edit</span>
-            </a>
-            <a mat-menu-item (click)="deleteReading.emit(reading)">
-              <i class="far fa-trash-alt"></i>
-              <span> Delete</span>
-            </a>
-          </mat-menu>
+          <lr-drop-down [items]="dropdownItems"></lr-drop-down>
 
         </div>
-        
+
       </div>
 
     </div>
