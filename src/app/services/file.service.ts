@@ -13,7 +13,7 @@ export class FileService {
 
   constructor(private afStorage: AngularFireStorage) { }
 
-  uploadFile(file: File) {
+  uploadFile(file: File): Promise<string> {
     const fullPath = `${this.basePath}/${file.name}`
     const ref = this.afStorage.ref(fullPath);
   

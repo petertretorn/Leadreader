@@ -42,11 +42,22 @@
         </div>
 
         <div *ngIf="isOwner" class="reading-header__controls">
-          <span>
-            <i (click)="editReading.emit(reading)" class="clickable fas fa-edit"></i>&nbsp;
-            <i (click)="deleteReading.emit(reading)" class="clickable far fa-trash-alt"></i>
-          </span>
+
+          <i class="menu-btn fas fa-ellipsis-v" mat-button [matMenuTriggerFor]="readingMenu"></i>
+
+          <mat-menu #readingMenu="matMenu">
+            <a mat-menu-item (click)="editReading.emit(reading)">
+              <i class="fas fa-edit"></i>
+              <span> &nbsp;Edit</span>
+            </a>
+            <a mat-menu-item (click)="deleteReading.emit(reading)">
+              <i class="far fa-trash-alt"></i>
+              <span> Delete</span>
+            </a>
+          </mat-menu>
+
         </div>
+        
       </div>
 
     </div>
